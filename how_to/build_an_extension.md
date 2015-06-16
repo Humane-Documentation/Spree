@@ -16,14 +16,16 @@ Suppose we want the ability to mark certain products as being on sale. We'd like
 * set a sale price on a product
 * show products that are on sale on a separate page
 
-Start by generating the extension outside of the Spree application:
+Start by generating the extension **outside** of the Spree application:
 ```shell
 spree extension simple_sales
 cd spree_simple_sales
 bundle install
 ```
-This creates a `spree_simple_sales` directory with several files and directories. 
-
+This creates a `spree_simple_sales` directory. Open **spree_simple_sales_gemspec** file, un-comment (author, email, homepage) lines and edit them as well as (summary, description) lines with your information. Then in `spree_simple_sales` directory:
+```shell
+bundle install
+```
 ### Adding a Sale Price to Variants
 
 We next create a migration that adds `sale_price` column to variants:
