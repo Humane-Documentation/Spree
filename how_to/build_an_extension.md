@@ -116,7 +116,7 @@ mkdir -p app/views/spree/home
 Next, create `app/views/spree/home/sale.html.erb` and add this to it:
 ```erb
 <div data-hook="homepage_products">
-  <%%= render 'spree/shared/products', :products => @products %>
+  <%= render 'spree/shared/products', :products => @products %>
 </div>
 ```
 If you navigate to `http://localhost:3000/sale` you should see the product(s) listed that we set
@@ -217,13 +217,13 @@ going to add content to (you can also view the [full file]
 (https://github.com/spree/spree/blob/master/backend/app/views/spree/admin/products/_form.html.erb)):
 ```erb
 <div class="right four columns omega" data-hook="admin_product_form_right">
-<%%= f.field_container :price do %>
-    <%%= f.label :price, raw(Spree.t(:master_price) + content_tag(:span, ' *',
+<%= f.field_container :price do %>
+    <%= f.label :price, raw(Spree.t(:master_price) + content_tag(:span, ' *',
      :class => 'required')) %>
-    <%%= f.text_field :price, :value => number_to_currency(@product.price,
+    <%= f.text_field :price, :value => number_to_currency(@product.price,
       :unit => '') %>
-    <%%= f.error_message_on :price %>
-<%% end %>
+    <%= f.error_message_on :price %>
+<% end %>
 ```
 We want our override to insert another field container after the price field container. We can do
 this by creating a new file `app/overrides/add_sale_price_to_product_edit.rb` and adding the
@@ -233,12 +233,12 @@ Deface::Override.new(:virtual_path => 'spree/admin/products/_form',
   :name => 'add_sale_price_to_product_edit',
   :insert_after => "erb[loud]:contains('text_field :price')",
   :text => "
-    <%%= f.field_container :sale_price do %>
-      <%%= f.label :sale_price, raw(Spree.t(:sale_price) + content_tag(:span, ' *')) %>
-      <%%= f.text_field :sale_price, :value =>
+    <%= f.field_container :sale_price do %>
+      <%= f.label :sale_price, raw(Spree.t(:sale_price) + content_tag(:span, ' *')) %>
+      <%= f.text_field :sale_price, :value =>
         number_to_currency(@product.sale_price, :unit => '') %>
-      <%%= f.error_message_on :sale_price %>
-    <%% end %>
+      <%= f.error_message_on :sale_price %>
+    <% end %>
   ")
 ```
 We also need to delegate `sale_price` to the master variant in order to get the updated product edit
