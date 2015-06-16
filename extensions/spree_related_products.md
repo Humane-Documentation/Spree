@@ -9,6 +9,9 @@ Provides a way to define different types of relationships between products such 
 * Replacement Products
 * Warranty & Support Products
 
+## Components
+
+
 ## Relation Types
 * `RelationType` defines each type of products relationship
 * Access related products of a `RelationType` by referencing the `relation_type` name:
