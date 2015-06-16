@@ -90,8 +90,7 @@ end
 
 ### Viewing On Sale Products
 #### Setting Sale Price for a Variant
-Let's update the sample data so we have at least one product that is on sale. We will use the
-rails console as we have no admin interface to set sale prices for variants:
+Let's update the sample data so we have at least one product that is on sale. We will use the rails console as we have no admin interface to set sale prices for variants. In `mystore` application application directory run:
 ```shell
 rails console
 ```
