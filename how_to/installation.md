@@ -7,6 +7,7 @@ Spree includes a helpful Rake task for setting up a sample application:
 git clone git://github.com/spree/spree.git
 cd spree
 ```
+> It's a good idea to use a new "*gem environment*" so Spree gems wouldn't fight with your existing dependencies. This can be done with [RVM Gemsets](https://rvm.io/gemsets/creating)
 * Install the gem dependencies
 ```shell
 bundle install
