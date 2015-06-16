@@ -10,7 +10,11 @@ Provides a way to define different types of relationships between products such 
 * Warranty & Support Products
 
 ## Components
+### Relation (Model)
+See [here](../models/Relation.md)
 
+### RelationType (Model)
+See [here](../models/RelationType.md)
 
 ## Relation Types
 * `RelationType` defines each type of products relationship
