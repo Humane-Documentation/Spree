@@ -20,8 +20,9 @@ Start by generating the extension outside of the Spree application:
 ```shell
 spree extension simple_sales
 cd spree_simple_sales
+bundle install
 ```
-This creates a `spree_simple_sales` directory with several files and directories
+This creates a `spree_simple_sales` directory with several files and directories. 
 
 ### Adding a Sale Price to Variants
 
