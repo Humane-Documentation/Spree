@@ -1,4 +1,6 @@
-## State Change (Model)
+[Index](../_index.md) » StateChange
+
+# (Class) [Spree::StateChange](http://m.gymplayer.com/state_change.rb)
 
 ### Attributes
 * `name`
@@ -7,3 +9,6 @@
 * `user_id`
 * `stateful_type`
 * `next_state`
+
+## Instance Methods
+### (Object) **<=>**(other)

@@ -1,4 +1,6 @@
-## Payment Model
+[Index](../_index.md) » Payment
+
+# (Class) [Spree::Payment](http://m.gymplayer.com/payment.rb)  
 `Payment` tracks payments against `Order`s to decouple logic of processing payments from orders
 
 ### Attributes
@@ -23,3 +25,75 @@
 | `failed`     | Payment rejected (e.g. card was declined)                  | `failure`            |
 | `void`       | These payments do NOT count against order total            | `void`               |
 | `completed`  | These payments count against order total                   | `complete`           |
+
+## Modules
+* [Processing](Payment/Processing.md)
+
+## Classes 
+* [GatewayOptions](Payment/GatewayOptions.md)
+
+## Constant
+NON_RISKY_AVS_CODES =['B', 'D', 'H', 'J', 'M', 'Q', 'T', 'V', 'X', 'Y'].freeze
+
+RISKY_AVS_CODES =['A', 'C', 'E', 'F', 'G', 'I', 'K', 'L', 'N', 'O', 'P', 'R', 'S', 'U', 'W', 'Z'].freeze
+
+## Methods included from
+* [Processing](Payment/Processing.md)
+
+### Methods inherited from
+* [Base](Base.md)
+
+### Methods included from
+* [Spree::Preferences::Preferable](Preferences/Preferable.md)
+
+## Instance Attributes
+### (Object) **request_env**
+Returns the value of attribute request_env
+
+### (Object) **source_attributes**
+Returns the value of attribute source_attributes
+
+## Instance Methods
+### (Object) **actions**
+    
+    
+### (Object) **amount=**(amount)
+        
+
+### (Object) **build_source**
+see [github.com/spree/spree/issues/981](https://github.com/spree/spree/issues/981)
+    
+###  (Boolean) **can_credit?**
+
+
+### (Object) **captured_amount**
+
+
+### (Object) **credit_allowed**
+
+
+### (Object) **currency**
+
+
+###  (Boolean) **editable?**
+
+
+###  (Boolean) **is_avs_risky?**
+   
+
+###  (Boolean) **is_cvv_risky?**
+ 
+
+### (Object) **money** Also known as: display_amount
+
+
+### (Object) **offsets_total**
+
+
+### (Object) **payment_source**
+
+
+### (Object) **transaction_id**
+transaction_id is much easier to understand
+
+### (Object) **uncaptured_amount**

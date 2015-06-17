@@ -1,9 +1,14 @@
-[Index (Z)](../_index.md) » [Spree](../Spree.md) » ZoneMember
+[Index](../_index.md) » ZoneMember
 
-# (Class) Spree::ZoneMember
-Inherits: [Base](Base.md)
+# (Class) [Spree::ZoneMember](http://m.gymplayer.com/zone_member.rb)
 
-### Attributes `zone_members`
+### Attributes
 * `zoneable_id`
 * `zoneable_type`
 * `zone_id`
+
+### Methods inherited from
+* [Base](Base.md)
+
+### Methods included from
+* [Preferences::Preferable](Preferences/Preferable.md)

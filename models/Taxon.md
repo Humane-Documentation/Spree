@@ -1,4 +1,6 @@
-## Taxon (Model)
+[Index](../_index.md) » Taxon
+
+# (Class) [Spree::Taxon](http://m.gymplayer.com/taxon.rb)
 
 #### Attributes
 * `parent_id`
@@ -25,10 +27,28 @@ taxon's page on the front end of the website
  page on the front end of the website
 * `depth`: depth of the taxon within the hierarchy, e.g. the most *parent* depth is 0
 
-
-
-
 ### Attributes `products_taxons`
 * `product_id`
 * `taxon_id`
 * `position`
+
+## Instance Methods
+### (Object) **active_products**
+
+
+### (Object) **applicable_filters**
+indicate which filters should be used for a taxon this method should be customized to your own site
+
+### (Object) **child_index=**(idx)
+awesome_nested_set sorts by :lft and :rgt. This call re-inserts the child node so that its resulting
+position matches the observable 0-indexed position. ** Note ** no :position column needed - a_n_s
+doesn't handle the reordering if you bring your own :order_column. See #3390 for background.
+
+### (Object) **pretty_name**
+
+
+### (Object) **seo_title**
+Return meta_title if set otherwise generates from root name and/or taxon name
+
+### (Object) **set_permalink**
+Creates permalink base for friendly_id

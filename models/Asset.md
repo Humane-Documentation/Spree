@@ -1,4 +1,10 @@
-### Attributes `assets`
+
+# (Class) [Spree::Asset](http://m.gymplayer.com/asset.rb)
+
+## Direct Subclasses
+[Image](Image.md)
+
+### Attributes
 * `viewable_id`
 * `viewable_type`: What the asset is of, variant or else
 * `attachment_width`

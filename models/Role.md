@@ -1,6 +1,8 @@
-## Role (Model)
+[Index](../_index.md) » Role
 
-### Attributes `roles`
+# (Class) [Spree::Role](http://m.gymplayer.com/role.rb)
+
+### Attributes
 * `name`
 * `editable`
 * `is_default`

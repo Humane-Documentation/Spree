@@ -1,4 +1,6 @@
-# Tax Category (Model)
+[Index](../_index.md) » TaxCategory
+
+# (Class) [Spree::TaxCategory](http://m.gymplayer.com/tax_category.rb)
 * Grouping products which are taxed the same way
 * Products can be linked to Tax Categories
 * A product must belong to a tax category to be taxable
@@ -16,3 +18,8 @@
 * `is_default`
 * `deleted_at`
 * `tax_code`
+
+## Instance Methods
+### (Object) **set_default_category**
+  
+

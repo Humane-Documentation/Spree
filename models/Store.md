@@ -1,4 +1,6 @@
-## Store (Model)
+[Index](../_index.md) » Store
+
+# (Class) [Spree::Store](http://m.gymplayer.com/store.rb)
 
 ### Attributes
 * `name`
@@ -10,3 +12,10 @@
 * `default_currency`
 * `code`: defaults to "spree"
 * `default`
+
+## Class Methods
+### (Object) **current**(domain = nil)
+
+
+### (Object) **default**
+

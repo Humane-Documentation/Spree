@@ -1,4 +1,6 @@
-# Tax Rate Model
+[Index](../_index.md) » TaxRate
+
+# (Class) [Spree::TaxRate](http://m.gymplayer.com/tax_rate.rb)
 * Percentage amount charged based on sales price
 * Contains other information:
     * Tax category a product must belong to to be taxable
@@ -49,64 +51,31 @@ Those rates should never come into play at all and only the French rates should 
 * `show_rate_in_label`
 * `deleted_at`
 
-
-Inherits::  [Base][1]
-
-* Object
-* ActiveRecord::Base
-* [Base][1]
-* Spree::TaxRate
-show all
-
-Includes:
-[AdjustmentSource][2], [CalculatedAdjustments][3]
-
-Defined in:
-app/models/spree/tax_rate.rb
-
-### Methods inherited from [Base][1]
-
-[page][4]
-
-### Methods included from [Preferences::Preferable][5]
-
-[#clear_preferences][6], [#default_preferences][7], [#defined_preferences][8], [#get_preference][9], [#has_preference!][10], [#has_preference?][11], [#preference_default][12], [#preference_type][13], [#set_preference][14]
-
-## Class Method Details
-
-### (`Object`) **adjust**(order, items)
-
+## Class Methods
+### (Object) **adjust**(order, items)
+Deletes all tax adjustments, then applies all applicable rates to relevant items.
 This method is best described by the documentation on #potentially_applicable?
 
-### (`Object`) **match**(order_tax_zone)
-Gets the array of TaxRates appropriate for the specified order
-
-### (`Object`) **potential_rates_for_zone**(zone)
-
-### (`Object`) **store_pre_tax_amount**(item, rates)
-
-## Instance Method Details
-
-### (`Object`) **adjust**(order, item)
-
-### (`Object`) **compute_amount**(item)
-
-### (`Boolean`) **potentially_applicable?**(order_tax_zone)
+### (Object) **match**(order_tax_zone)
+Gets the array of TaxRates appropriate for the specified tax zone
+      
+### (Object) **potential_rates_for_zone**(zone)
 
 
+### (Object) **included_tax_amount_for**(zone, category)
 
 
-[1]: Base.html "Spree::Base (class)"
-[2]: AdjustmentSource.html "Spree::AdjustmentSource (module)"
-[3]: CalculatedAdjustments.html "Spree::CalculatedAdjustments (module)"
-[4]: Base.html#page-class_method "Spree::Base.page (method)"
-[5]: Preferences/Preferable.html "Spree::Preferences::Preferable (module)"
-[6]: Preferences/Preferable.html#clear_preferences-instance_method "Spree::Preferences::Preferable#clear_preferences (method)"
-[7]: Preferences/Preferable.html#default_preferences-instance_method "Spree::Preferences::Preferable#default_preferences (method)"
-[8]: Preferences/Preferable.html#defined_preferences-instance_method "Spree::Preferences::Preferable#defined_preferences (method)"
-[9]: Preferences/Preferable.html#get_preference-instance_method "Spree::Preferences::Preferable#get_preference (method)"
-[10]: Preferences/Preferable.html#has_preference%21-instance_method "Spree::Preferences::Preferable#has_preference! (method)"
-[11]: Preferences/Preferable.html#has_preference%3F-instance_method "Spree::Preferences::Preferable#has_preference? (method)"
-[12]: Preferences/Preferable.html#preference_default-instance_method "Spree::Preferences::Preferable#preference_default (method)"
-[13]: Preferences/Preferable.html#preference_type-instance_method "Spree::Preferences::Preferable#preference_type (method)"
-[14]: Preferences/Preferable.html#set_preference-instance_method "Spree::Preferences::Preferable#set_preference (method)"
+### (Object) **store_pre_tax_amount**(item, rates)
+Pre-tax amounts must be stored so that we can calculate correct rate amounts
+in the future. For example: 
+[github.com/spree/spree/issues/4318#issuecomment-34723428](https://github.com/spree/spree/issues/4318#issuecomment-34723428)
+
+## Instance Methods
+### (Object) **adjust**(order, item)
+
+
+### (Object) **compute_amount**(item)
+
+
+### (Boolean) **potentially_applicable?**(order_tax_zone)
+

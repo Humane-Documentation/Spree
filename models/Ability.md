@@ -1,6 +1,6 @@
 [Index](../_index.md) » Ability
 
-# (Class) [Spree::Ability](https://github.com/spree/spree/blob/master/core/app/models/spree/ability.rb)
+# (Class) [Spree::Ability](http://m.gymplayer.com/ability.rb)
 
 ## Constructor
 ###  `[Ability]()`) **initialize**(user)

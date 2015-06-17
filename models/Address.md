@@ -1,6 +1,6 @@
 [Index](../_index.md) » Address
 
-# (Model) [Spree::Address](https://github.com/spree/spree/blob/master/core/app/models/spree/address.rb)
+# (Model) [Spree::Address](http://m.gymplayer.com/address.rb)
 * Tracks address address info, mainly for orders but can also be tied to `User` objects that come 
 from `spree_auth_devise` extension
 * Easy way to get the state info for the address is to call `state_text` on that object
@@ -36,9 +36,7 @@ Generates an ActiveMerchant compatible address hash
 
 ### (Object) **clone**
 
-
 ###  (Boolean) **empty?**
-
 
 ### (Object) **full_name**
 Can modify an address if it's not been used in an order (but checkouts
@@ -46,11 +44,11 @@ controller has finer control) def editable?
 
 ###  (Boolean) **require_phone?**
 
-
 ###  (Boolean) **require_zipcode?**
 
+###  (Boolean) **same_as?**(other) Also known as: same_as
 
-###  (Boolean) **same_as?**(other) Also known as: same_as### (Object) **state_text**
+### (Object) **state_text**
 
 
 ### (Object) **to_s**

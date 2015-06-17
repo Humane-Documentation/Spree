@@ -1,4 +1,6 @@
-## Option Type (Model)
+[Index](../_index.md) » OptionType
+
+# (Class) [Spree::OptionType](http://m.gymplayer.com/option_type.rb)
 * Product options that distinguish variants
 * Created at the store level (i.e. can be used with any product)
 * Option types are product options that distinguish variants
@@ -17,3 +19,6 @@ Product: Baseball Jersey
 * `name`: internal, descriptive name
 * `presentation`: "Display" term shown to users
 * `position`
+
+## Instance Methods
+### (Object) **touch_all_products**
