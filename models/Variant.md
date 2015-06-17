@@ -2,7 +2,7 @@
 
 # (Class) [Spree::Variant](http://m.gymplayer.com/variant.rb)
 
-> Variant is document in detail under [Product](./Product)
+> Variant is document in detail under [Product Guide](../../Products)
 
 #### Attributes
 * `sku`
