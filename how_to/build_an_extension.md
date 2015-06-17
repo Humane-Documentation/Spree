@@ -143,6 +143,7 @@ module Spree
   end
 end
 ```
+Restart your server for the magic to appear
 
 ### Testing Our Decorator
 We should be careful with our Variant decorator since we are modifying core Spree functionality.
