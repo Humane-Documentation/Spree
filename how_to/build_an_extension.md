@@ -258,6 +258,9 @@ Now, when we head to `http://localhost:3000/admin/products` and edit a product, 
 to set a sale price for the product and be able to view it on our sale page,
 `http://localhost:3000/sale`.
 
+## Tips
+* Don't forget to use the full Spree class name when referring to it, e.g. "Spree::Admin::XXX", "Spree::XXX", etc.
+
 ## Versioning the Extension
 Different versions of Spree may act differently with your extension so it's advisable to keep
 different branches of your extension maintained for the different branches of Spree.
