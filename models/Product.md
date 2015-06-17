@@ -36,4 +36,4 @@ change it but be cautious to avoid naming collisions with other products in your
 * *Shipping Categories*
 * *Tax Category*
 * *Taxons*: See [Taxonomies Guide](Taxonomy.md)
-* *Option Types*: Select any Option to associate a product with. See [Option Types](OptionType.md)
+* *Option Types*: Select any Option to associate a product with. See [Option Type](OptionType.md)

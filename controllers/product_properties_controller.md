@@ -1,24 +1,3 @@
-<!-- TOC depth:6 withLinks:1 updateOnSave:1 -->
-- [Product Properties API](#product-properties-api)
-	- [Index](#index)
-		- [Parameters](#parameters)
-				- [Response](#response)
-	- [Search](#search)
-				- [Response](#response)
-		- [Sorting results](#sorting-results)
-	- [Show](#show)
-				- [Response](#response)
-	- [Create](#create)
-				- [Response](#response)
-	- [Update](#update)
-				- [Response](#response)
-	- [Delete](#delete)
-<!-- /TOC -->
-
-
-
-
-
 # Product Properties API
 
 > Warning: Requests to this API succeed only if the user has access to the underlying products. If

@@ -20,7 +20,7 @@ Defined in:
 : app/models/spree/promotion_action.rb
 
 
-##  Instance Method Summary
+##  Instance Methods Summary
 
 * \- (Object) **perform**(options = {})
 

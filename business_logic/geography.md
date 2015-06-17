@@ -1,6 +1,6 @@
 # Geography
 
-Spree store make decisions about [shipping](shipments) and [taxation](taxation) policies using:
+Spree store make decisions about [shipping](shipping.md) and [taxation](taxation.md) policies using:
 
 ### Countries
 See [Country model](../models/Country.md)
