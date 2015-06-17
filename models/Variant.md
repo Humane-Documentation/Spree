@@ -1,8 +1,22 @@
 [Index](../_index.md) » Variant
 
 # (Class) [Spree::Variant](http://m.gymplayer.com/variant.rb)
+> Variant is also document under [Product Guide](../../Products)
 
-> Variant is document in detail under [Product Guide](../../Products)
+* A variant tracks a group of individual properties (Option Types) of a `Product` such as height,
+ width, depth, and cost price
+* These properties are unique to each variant and so are on top of `Product Properties` that apply
+ to all variants of a product
+* All variants can access the product properties directly (via reverse delegation)
+* Inventory units are tied to Variant. Other variants have option values and may have inventory units
+* Sum of `on_hand` each variant's inventory level determine `on_hand` level for the product
+* `sku` field holds product's stock code
+
+#### Example
+Variants: "Small, Red", "Small, Green", "Small, Blue", "Medium, Red", "Medium, Green"...
+
+### Normal Variants
+All non-master variants are  based on `option_type` and `option_value` combinations
 
 #### Attributes
 * `sku`
