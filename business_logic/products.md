@@ -33,18 +33,13 @@ the paperclip thumbnails with this Bash command:
 ```shell
 bundle exec rake paperclip:refresh:thumbnails CLASS=Spree::Image
 ```
-* To change the image displayed when a product has no image, create new versions of the files within
-[app/assets/images/noimage]
+* To change the image displayed when a product has no image, create new versions of the files within [app/assets/images/noimage]
 
 ## Option Types and Option Values
 See [here](../models/OptionType.md)
 
 ## Product Properties
 See [here](../models/ProductProperty.md)
-
-#### Examples
-* Product: T-Shirt
-* Property: "material", "fit type"
 
 ## Multi-Currency
 * `Price` objects track a price for a particular currency and variant combination. For instance,
