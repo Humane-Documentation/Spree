@@ -14,6 +14,10 @@ product.property("material")
 product.set_property("material", "100% cotton")
 ```
 
+#### Examples
+* Product: T-Shirt
+* Property: "material", "fit type"
+
 ### Attributes
 * `value`: e.g. *15" x 18" x 6"* or *90% Cotton, 10% Nylon*
 * `product_id`
