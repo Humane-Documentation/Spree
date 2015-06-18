@@ -4,7 +4,10 @@
 ### Product (Model)
 See [here](../models/Product.md)
 
-### Master Variants
+## Variants
+See [here](../models/Variant.md)
+
+## Master Variants
 * Created whenever a new product is created so every product has a single master variant
 * Stores master price and sku, size and weight, etc.
 * Stores on_hand inventory levels/units only when there are no variants for the product
@@ -12,24 +15,6 @@ See [here](../models/Product.md)
 * Master variants sole purpose is having a consistent API when associating variants and
 `orders#line-items`. Otherwise line items would need to track a polymorphic association which can
  be a product or a variant
-
-### Option Types and Option Values
-See [here](../models/OptionType.md)
-
-## Variants
-* A variant tracks a group of individual properties (Option Types) of a `Product` such as height,
- width, depth, and cost price
-* These properties are unique to each variant and so are on top of `Product Properties` that apply
- to all variants of a product
-* All variants can access the product properties directly (via reverse delegation)
-* Inventory units are tied to Variant. Other variants have option values and may have inventory units
-* Sum of `on_hand` each variant's inventory level determine `on_hand` level for the product
-* `sku` field holds product's stock code
-
-### Normal Variants
-All non-master variants are  based on `option_type` and `option_value` combinations
-#### Example (Continuation)
-Variants: "Small, Red", "Small, Green", "Small, Blue", "Medium, Red", "Medium, Green"...
 
 ## Images
 * Images link to a product through its master variant.
@@ -50,6 +35,9 @@ bundle exec rake paperclip:refresh:thumbnails CLASS=Spree::Image
 ```
 * To change the image displayed when a product has no image, create new versions of the files within
 [app/assets/images/noimage]
+
+## Option Types and Option Values
+See [here](../models/OptionType.md)
 
 ## Product Properties
 See [here](../models/ProductProperty.md)
