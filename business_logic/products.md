@@ -1,6 +1,12 @@
 # Products Guide
 
 ## Components
+### Taxonomy (Model)
+See [here](../models/Taxonomy.md)
+
+### Taxon (Model)
+See [here](../models/Taxon.md)
+
 ### Product (Model)
 See [here](../models/Product.md)
 
@@ -38,42 +44,11 @@ bundle exec rake paperclip:refresh:thumbnails CLASS=Spree::Image
 ## Option Types and Option Values
 See [here](../models/OptionType.md)
 
+## Price
+See [here](../models/Price.md)
+
 ## Product Properties
 See [here](../models/ProductProperty.md)
 
-## Multi-Currency
-* `Price` objects track a price for a particular currency and variant combination. For instance,
-a Variant may be available for $15 and �7
-* Presence or lack of a price for a variant in a currency will determine if the variant is visible
-in the frontend. If no variants of a product have a particular price value for the site's current
-currency, that product will not be visible in the frontend.
-* You may see what price a product would be in the current currency (`Config[:currency]`) by calling
-the `price` method on that instance:
-```shell
-product.price
-=> "15.99"
-```
-* To find the currencies a product is available in, call `prices` to get related `Price` objects:
-```shell
-product.prices
-=> [#<Spree::Price id: 2 ...]
-```
-
 ## Prototypes
 See [here](../models/Prototype.md)
-
-## Taxons and Taxonomies
-* `Taxonomy`: the category tree - a hierarchical list of individual Taxons
-* Each `Taxonomy` relates to one `Taxon` that is its root node
-* `Taxon`: a single child node which exists at a given point within a `Taxonomy`
-* Each `Taxon` can contain many or no child taxons
-* Admins can define many Taxonomies and link a product to multiple Taxons from each Taxonomy
-* By default, both Taxons and Taxonomies are ordered by their `position` attribute
-* Taxons use [Nested set model](http://en.wikipedia.org/wiki/Nested_set_model) for their hierarchy.
-The `lft` and `rgt` columns in the `spree_taxons` table represent the locations within the hierarchy
-of the item. This logic is handled by awesome_nested_set gem
-* Taxons link to products through a `Classification` model that when a product is deleted, all links
-from it to its taxons are deleted automatically. Similarly, when a taxon is deleted all links to
-products are deleted automatically
-* Linking to a taxon in a controller or a template should be done using `nested_taxons_path` helper
-which will use the taxon's permalink to generate a URL such as `/t/categories/brand`
