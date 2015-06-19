@@ -1,6 +1,9 @@
 [Index](../_index.md) » Taxon
 
 # (Class) [Spree::Taxon](http://m.gymplayer.com/taxon.rb)
+
+![z](taxonomy_tree.jpg)
+
 * A single child node which exists at a given point within a [Taxonomy](ProductProperty.md)
 * Each `Taxon` can contain many or no child taxons
 * Admins can define many Taxonomies and link a product to multiple Taxons from each Taxonomy
@@ -14,7 +17,7 @@ products are deleted automatically
 * Linking to a taxon in a controller or a template should be done using `nested_taxons_path` helper
 which will use the taxon's permalink to generate a URL such as `/t/categories/brand`
 
-#### Attributes
+## Attributes
 * `parent_id`
 * `position`
 * `name`: A required field for all taxons. The name determines what the user will see when they
@@ -39,7 +42,7 @@ taxon's page on the front end of the website
  page on the front end of the website
 * `depth`: depth of the taxon within the hierarchy, e.g. the most *parent* depth is 0
 
-### Attributes `products_taxons`
+### Related Attributes `products_taxons`
 * `product_id`
 * `taxon_id`
 * `position`
