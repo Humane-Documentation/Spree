@@ -1,5 +1,5 @@
-## User  (Model)
-Exists under Devise
+## [Spree::User](https://github.com/spree/spree_auth_devise/tree/master/app/models/spree/user.rb)
+Exists under [spree_auth_devise](https://github.com/spree/spree_auth_devise) gem
 
 ### Attributes
 * `encrypted_password`
