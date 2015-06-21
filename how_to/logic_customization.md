@@ -7,8 +7,8 @@ using standard Ruby
 create a file within the relevant **(app/models/spree)** or  **(app/controllers/spree)**
 directory with the original class name appended with `_decorator`
 
-### Adding/Redefining a Method
-For an action in `Product` Model, create `app/models/spree/product_decorator.rb` with:
+#### Adding/Redefining a Method
+To add an action in `Product` Model for example, create `app/models/spree/product_decorator.rb` with:
 ```
 Spree::Product.class_eval do
   def some_method
@@ -18,9 +18,8 @@ end
 ```
 The exact same format can be used to redefine an existing method
 
-### Adding/Redefining an Action
-For an action in `ProductsController`, create
-`app/controllers/spree/products_controller_decorator.rb` with:
+#### Adding/Redefining an Action
+To add or modify an action in `ProductsController`, create `app/controllers/spree/products_controller_decorator.rb` with:
 ```
 Spree::ProductsController.class_eval do
   def some_action
@@ -29,7 +28,7 @@ Spree::ProductsController.class_eval do
 end
 ```
 
-### Accessing Data in a Custom Method
+#### Accessing Data in a Custom Method
 You can access product data in the new method using `:load_data before_filter`
 ```
 Spree::ProductsController.class_eval do
@@ -41,7 +40,7 @@ end
 ```
 `:load_data` uses params[:id] to lookup the product by its permalink
 
-## `respond_override`
+## `respond_override` Method
 * A method that overrides or changes the output of a controller's action without completely overriding the method (avoiding double render exceptions)
 * Can customize the response from any action, and is built on top of
 Rails's `respond_with` method (which Spree controllers use).
