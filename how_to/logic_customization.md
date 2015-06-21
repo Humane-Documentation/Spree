@@ -59,7 +59,7 @@ Rails's `respond_with` method (which Spree controllers use).
 respond_override :action_name => { :format =>  { :result => lambda { ... response ... } } }
 ```
 
-### *Examples*
+#### *Examples*
 To render a custom partial for `index` action of `ProductsController`, create
 `app/controllers/spree/products_controller_decorator.rb` with:
 ```
@@ -77,7 +77,7 @@ Spree::Admin::ProductsController.class_eval do
 end
 ```
 
-### Caveats
+#### Caveats
 * If an action does not use `respond_with` to define its responses then `respond_override` will
  **not** work
 * Some actions contain several `respond_with` calls so a `respond_override` defined on it
