@@ -1,17 +1,12 @@
-# Extensions
+# Extension Exercise
 
-Extensions are the primary mechanism for customizing Spree, sharing reusable code and organizing
-and isolating discrete chunks of functionality
+> This exercise should be read **after** reading the other customization guides
 
 ## Extension Registry
-[Spree Extension Registry](http://spreecommerce.com/extensions) is a searchable collection of
-Extensions written and maintained by members of the [Spree Community]
-(http://spreecommerce.com/community)
+In general, it's a good idea to search existing extensions before building one as you may find one that implements what you need or provide a good starting point. You can search for these in the
+[Spree Extension Registry](http://spreecommerce.com/extensions) or in Github
 
-If you need to extend Spree application's functionality, look in the Extension Registry first;
-you may find an extension that either implements what you need or provides a good starting point
-
-## Creating an Extension
+## Creating the Extension
 Suppose we want the ability to mark certain products as being on sale. We'd like to be able to:
 * set a sale price on a product
 * show products that are on sale on a separate page
@@ -22,10 +17,13 @@ spree extension simple_sales
 cd spree_simple_sales
 bundle install
 ```
-This creates a `spree_simple_sales` directory. Open **spree_simple_sales_gemspec** file, un-comment (author, email, homepage) lines and edit them as well as (summary, description) lines with your information. Then in `spree_simple_sales` directory:
+This creates a `spree_simple_sales` directory. Open **spree_simple_sales_gemspec** file,
+un-comment (author, email, homepage) lines and edit them as well as (summary, description)
+lines with your information. Then in `spree_simple_sales` directory:
 ```shell
 bundle install
 ```
+
 ### Adding a Sale Price to Variants
 
 We next create a migration that adds `sale_price` column to variants:
@@ -90,7 +88,9 @@ end
 
 ### Viewing On Sale Products
 #### Setting Sale Price for a Variant
-Let's update the sample data so we have at least one product that is on sale. We will use the rails console as we have no admin interface to set sale prices for variants. In `mystore` application application directory run:
+Let's update the sample data so we have at least one product that is on sale. We will use the
+rails console as we have no admin interface to set sale prices for variants. In `mystore`
+application application directory run:
 ```shell
 rails console
 ```
@@ -99,9 +99,16 @@ price. Note, you may not be editing the exact same product as I am, but this is 
 just need one "on sale" product to display on the sales page.
 ```irb
 > product = Spree::Product.first
-=> #<Spree::Product id: 107377505, name: "Spree Bag", description: "Lorem ipsum dolor sit amet, consectetuer adipiscing...", available_on: "2013-02-13 18:30:16", deleted_at: nil, permalink: "spree-bag", meta_description: nil, meta_keywords: nil, tax_category_id: 25484906, shipping_category_id: nil, count_on_hand: 10, created_at: "2013-02-13 18:30:16", updated_at: "2013-02-13 18:30:16", on_demand: false>
+=> #<Spree::Product id: 107377505, name: "Spree Bag", description: "Lorem ipsum dolor sit amet,
+consectetuer adipiscing...", available_on: "2013-02-13 18:30:16", deleted_at: nil, permalink:
+"spree-bag", meta_description: nil, meta_keywords: nil, tax_category_id: 25484906,
+shipping_category_id: nil, count_on_hand: 10, created_at: "2013-02-13 18:30:16", updated_at:
+"2013-02-13 18:30:16", on_demand: false>
 > variant = product.master
-=> #<Spree::Variant id: 833839126, sku: "SPR-00012", weight: nil, height: nil, width: nil, depth: nil, deleted_at: nil, is_master: true, product_id: 107377505, count_on_hand: 10, cost_price: #<BigDecimal:7f8dda5eebf0,'0.21E2',9(36)>, position: nil, lock_version: 0, on_demand: false, cost_currency: nil, sale_price: nil>
+=> #<Spree::Variant id: 833839126, sku: "SPR-00012", weight: nil, height: nil, width: nil,
+depth: nil, deleted_at: nil, is_master: true, product_id: 107377505, count_on_hand: 10,
+cost_price: #<BigDecimal:7f8dda5eebf0,'0.21E2',9(36)>, position: nil, lock_version: 0,
+on_demand: false, cost_currency: nil, sale_price: nil>
 > variant.sale_price = 8.00
 => 8.0
 > variant.save
@@ -259,7 +266,8 @@ to set a sale price for the product and be able to view it on our sale page,
 `http://localhost:3000/sale`.
 
 ## Tips
-* Don't forget to use the full Spree class name when referring to it, e.g. "Spree::Admin::XXX", "Spree::XXX", etc.
+* Don't forget to use the full Spree class name when referring to it, e.g.
+"Spree::Admin::XXX", "Spree::XXX", etc.
 
 ## Versioning the Extension
 Different versions of Spree may act differently with your extension so it's advisable to keep

@@ -57,7 +57,7 @@ and `rails-i18n` are railties.
 When reviewing the source of any view in Spree you'll notice that all text is rendered by passing
  a string to a helper method similar to:
 ```erb
-<%%= Spree.t(:price) %>
+<%= Spree.t(:price) %>
 ```
 The *Spree.t()* helper method looks up the currently configured locale and retrieves the translated
 value from the relevant locale YAML file. Assuming a default locale, this translation would be
