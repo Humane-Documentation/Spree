@@ -5,51 +5,68 @@ customization
 
 ## Customization Approaches
 ### 1) Application Specific
-* Tweaks behaviour or appearance to match a business's processes, branding, or add a unique feature
-* Stored within the host application where Spree is installed
-* Generally not shared or re-used
+* Tweaks behavior or appearance of Spree for a single host application
+* Not intended to be shared or re-used
 
-### 2) Extension
-* Discrete chunks of functionality implemented as Rails engines
-* Provide a modular way to organize and isolate changes needed to implement larger features
-* Primary mechanism for customizing Spree
-* Usually intended to be installed in multiple applications and distributed as ruby gems
-* [Spree Extension Registry](http://spreecommerce.com/extensions) is a searchable collection of
-Extensions written and maintained by the Spree Community
+#### Storing Options
+##### In a Spree Fork
+* Forking Spree on Github directly customizing it and then running the site on this forked version
+* Disadvantages:
+    * Can be a headache to get right (Hint: Spree is huge)
+    * A hassle to tracking changes to `spree/master` and pulling them into your project at the right time
 
-> See the [Extension Exercise](../how_to/extensions.md) for a step-by-step guide
+> If you need extensive changes to core in a fork, you probably would want to look
+seriously at splitting the custom code off into stand-alone extensions and then see whether
+any of the remaining code should be contributed to the core fork
 
-### 3) Theme
-* Overhauls the look and feel of a Spree store or admin UIs
-* Doesn't include logic customizations
-* Distributed like gems
+##### In The Host Application
+* Certified Lazy Way
+* Disadvantages:
+    * Spree customization code and its logic could get mixed up with the original site code and customizations
 
-### To fork or not to fork
-Suppose there's a few details you want to override that aren't views like tweaks to models
-or controllers. You could:
-* Hide these in the application, but they could get mixed up with your real site code and
-customizations
-* Fork Spree and run your site on this forked version, but this can be a headache to
-get right and also a hassle in tracking changes to `spree/master` and pulling them into your
- project at the right time
-* Have an extra extension, say `spree-tweaks`, to contain your small collection of modified
-files, which is loaded first in the extensions order. The benefits:
+##### In a Spree Extension
+* Having an extra [Spree Extension](#Spree_Extension) (e.g. `spree-tweaks`) to contain the collection of modified
+files, and loading first in the extensions order
+* Advantages:
   * Basing your project on an official Spree release (with its own git branch)
   * Keeping clear what you are overriding to check against any core changes
-  * Modularize
+  * Easier to modularize in the future
 
-If you find yourself wanting extensive changes to core, you probably would want to look
-seriously at splitting the custom code off into stand-alone extensions and then see whether
-any of the other code should be contributed to the core
+### 2) Modular
+#### 2-a) Extension
+* Discrete chunks of functionality organized and isolated to implement larger but specific and clear features
+* Implemented as a Spree Extension
+* Intended to be installed in multiple applications and distributed as ruby gems
+* [Spree Extension Registry](http://spreecommerce.com/extensions) is a searchable collection of such extensions written and maintained by the Spree Community
 
-## Upgrade Considerations
+#### 2-b) Theme
+* Overhauls the look and feel of a Spree store or admin UIs
+* Doesn't include logic customizations
+* Mostly distributed as a gem and implemented as a Spree Extension
+
+## Customization Guides
+* [Logic](../how_to/logic_customization.md): Changing and or extending logic Spree's logic
+* [Asset](../how_to/asset_customization.md): Changing static assets provided by Spree, including stylesheets, JavaScript, files
+and images
+* [View](../how_to/logic_customization.md): Changing and or extending look and feel of the store and its administration
+
+## Tools & Tips
+### Spree Extensions
+* Provides a way to organize and isolate customizations needed
+* Implemented as Rails engines so it's automatically a gem
+* Primary mechanism for customizing Spree
+
+> See the [Spree Extension Exercise](../how_to/extension_exercise.md) for a step-by-step tutorial
+
+### Initializers
+* Initializers, which are run during startup, are the recommended way to execute custom application-wide settings
+* You can put initializers in extensions, thus have a way to execute extension-specific
+configurations
+
+> Avoid modifying `config/boot.rb` and `config/environment.rb`; use initializers instead
+ 
+### Upgrade Considerations
 * Core changes might impact what's overridden so you might need to patch your custom code or ensure
 it interacts correctly with changed code (e.g. using appropriate ids in HTML to so new JS works)
-* If you can, help us generalize the core code so your preferred effect is achieved by altering
-fewer parameters, this will be more useful than duplicating several files
-
-## Customization Categories
-1. **Logic**: Changing and or extension of the logic of Spree to meet specific business requirements
-2. **Asset**: Changing static assets provided by Spree, including stylesheets, JavaScript, files
-and images
-3. **View**: Changing and or extending look and feel of the store and its administration
+* If possible, help us generalize the core code so your preferred effect is achieved by altering
+fewer parameters. This is more practical than just duplicating files
