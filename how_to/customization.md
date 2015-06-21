@@ -48,14 +48,6 @@ it interacts correctly with changed code (e.g. using appropriate ids in HTML to 
 * If you can, help us generalize the core code so your preferred effect is achieved by altering
 fewer parameters, this will be more useful than duplicating several files
 
-## Initializers
-* Initializers are run during startup and so are the recommended way to execute most settings
-* You can put initializers in extensions, thus have a way to execute extension-specific
-configurations
-
-> Avoid modifying `config/boot.rb` and `config/environment.rb`; use [initializers](#initializers)
- instead
-
 ## Customization Categories
 1. **Logic**: Changing and or extension of the logic of Spree to meet specific business requirements
 2. **Asset**: Changing static assets provided by Spree, including stylesheets, JavaScript, files
