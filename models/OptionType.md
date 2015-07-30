@@ -1,11 +1,10 @@
 [Index](../_index.md) » OptionType
 
 # (Class) [Spree::OptionType](http://m.gymplayer.com/option_type.rb)
-* Product options that distinguish variants
+* Options that distinguish variants, so a a product must be assigned at least 
+one option type to create variants out of it
+* Each `OptionType` has one or more `OptionValues` (see example)
 * Created at the store level (i.e. can be used with any product)
-* Option types are product options that distinguish variants
-* Each Option Type owns one or more Option Values
-* A product must be assigned at least one option type to create variants out of it
 
 #### Example
 Product: Baseball Jersey
