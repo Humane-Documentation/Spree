@@ -65,25 +65,6 @@ before it's time to authorize it. In detail:
 
 This is secure since CC information is transmitted to the gateway and then discarded
 
-### *Customization Tips*
-#### Payment Profiles
-* All `Gateway` classes have a `payment_profiles_supported?` method which indicates whether or
-not payment profiles are supported
-* If you are adding Spree support to a `Gateway` you should also implement the `create_profile`
-method. The following is an example:
-```
-# Create a new CIM customer profile ready to accept a payment
-def create_profile(payment)
-  if payment.source.gateway_customer_profile_id.nil?
-    profile_hash = create_customer_profile(payment)
-    payment.source.update_attributes({
-      :gateway_customer_profile_id => profile_hash[:customer_profile_id],
-      :gateway_payment_profile_id => profile_hash[:customer_payment_profile_id])
-    })
-  end
-end
-```
-
 ### Processing Walk-through (UI)
 * Receiving an order, an admin needs to process its payment (this guide focuses on processing
 credit card payments). An order is ready for processing if
@@ -127,3 +108,22 @@ To get `Active::Merchant::Billing::Response` out of `LogEntry` objects, call the
 
 ## Voiding a Payment
 Done from the Admin Interface
+
+## *Customization Tips*
+### Payment Profiles
+* All `Gateway` classes have a `payment_profiles_supported?` method which indicates whether or
+not payment profiles are supported
+* If you are adding Spree support to a `Gateway` you should also implement the `create_profile`
+method. The following is an example:
+```
+# Create a new CIM customer profile ready to accept a payment
+def create_profile(payment)
+  if payment.source.gateway_customer_profile_id.nil?
+    profile_hash = create_customer_profile(payment)
+    payment.source.update_attributes({
+      :gateway_customer_profile_id => profile_hash[:customer_profile_id],
+      :gateway_payment_profile_id => profile_hash[:customer_payment_profile_id])
+    })
+  end
+end
+```
