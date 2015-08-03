@@ -13,14 +13,17 @@ See [here](../models/Adjustment.md)
 
 ## Order States
 ![](order_states.png)
-1. `cart`: One or more products have been added to the shopping cart
-2. `address`: Order is awaiting billing and shipping address data
-3. `delivery`: Order is awaiting shipping method selection
-4. `payment`: Order is awaiting payment data. Triggered if `payment_required?` returns `true`
-5. `confirm`: Order is awaiting confirmation. Triggered if `confirmation_required?` returns `true`
-6. `complete`:  No payment is required on the order or it is, at least the order total has been received as payment
 
-> * An order cannot continue to the next state until the previous state has been satisfied
+| State      | Description                                                                    |
+|------------|--------------------------------------------------------------------------------|
+| `cart`     | One or more products were added to the shopping cart                           |
+| `address`  | Awaiting billing and shipping address data                                     |
+| `delivery` | Awaiting shipping method selection                                             |
+| `payment`  | Awaiting payment data. Triggered if `payment_required?` returns `true`         |
+| `confirm`  | Awaiting confirmation. Triggered if `confirmation_required?` returns `true`    |
+| `complete` | No payment required on the order or at least its total was received as payment |
+
+* An order cannot continue to the next state until the previous state has been satisfied
 * you can transition an order by calling `next` on it. If `false` returns, then it doesn't meet
 the next state's criteria. Check the `errors` message
 
