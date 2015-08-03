@@ -252,7 +252,7 @@ vehicle.state_name              # => :parked
 ### ActiveModel
 
 * Adds support for validation errors, dirty attribute tracking, and observers
-* Useful for standard ActiveModel and for ORMs which implement the ActiveModel API
+* Useful for standard ActiveModel and ORMs implementing ActiveModel API
 * For more information about the various behaviors added for ActiveModel state
 machines, see `StateMachine::Integrations::ActiveModel`
 
@@ -474,7 +474,6 @@ end
 ## Additional Topics
 
 ### Explicit vs. Implicit Event Transitions
-
 Every event defined for a state machine generates an instance method on the
 class that allows the event to be explicitly triggered.  Most of the examples in
 the state_machine documentation use this technique.  However, with some types of
@@ -523,7 +522,6 @@ See each integration's API documentation for more information on the implicit
 approach.
 
 ### Symbols vs. Strings
-
 In all of the examples used throughout the documentation, you'll notice that
 states and events are almost always referenced as symbols.  This isn't a
 requirement, but rather a suggested best practice.
@@ -794,7 +792,6 @@ to create new machine definitions on the fly based on an external source of
 transitions.
 
 ### Core/Native Extensions
-
 By default, state_machine extends the Ruby core with a `state_machine` method on
 `Class`.  All other parts of the library are confined within the `StateMachine`
 namespace.  While this isn't wholly necessary, it also doesn't have any performance
