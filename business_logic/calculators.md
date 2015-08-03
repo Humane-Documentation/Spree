@@ -103,7 +103,8 @@ Suppose you have a Price Sack calculator with a `minimal_amount` preference of $
 An order with a line items total of $60 would result in a discount of $5 for the whole order.
 An order of $20 would result in a discount of $2.
 
-## Creating a Custom Calculator
+## *Customization Tips*
+### Creating a Custom Calculator
 * Inherit from `Calculator` class and define `description` and `compute` methods:
 ```
     class CustomCalculator < Spree::Calculator
@@ -133,7 +134,7 @@ class CustomCalculator < Spree::Calculator
 end
 ```
 
-## Calculated Adjustments
+### Calculated Adjustments
 If you wish to use Spree's calculator functionality in a model
 * Include `Spree::Core::CalculatedAdjustments` module into the model:
 ```
