@@ -74,7 +74,8 @@ product(s) to the order
 negated
 * Like prior actions, eligibility of this promotion is re-checked whenever a shipment changes
 
-### Customization: Adding a New Action
+### *Customization Tips*
+#### Adding a New Action
 * Inherit from `Spree::PromotionAction`:
 ```
 class MyPromotionAction < Spree::PromotionAction
@@ -120,7 +121,8 @@ eligibility requires that:
 | `Taxon(s)`         | Order includes product(s) of a given taxon(s)           |
 
 
-### Customization: Adding a New Rule
+### *Customization Tips*
+#### Adding a New Rule
 
 * Inherit from `Spree::PromotionRule` as such (note code comments):
 ```
