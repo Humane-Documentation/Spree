@@ -11,7 +11,19 @@ See [here](../models/PaymentMethod.md)
 ### Gateway (Model)
 See [here](../models/Gateway.md)
 
-### Merchant Account (TMI)
+## Payment States
+![](payment_states.png)
+
+| State        | Description                                                | Callable with        |
+|--------------|------------------------------------------------------------|----------------------|
+| `checkout`   | still in checkout                                          |                      |
+| `processing` | Temporary state to prevent double submission               | `started_processing` |
+| `pending`    | Processed but incomplete (eg. authorized but not captured) | `pend`               |
+| `failed`     | Payment rejected (e.g. card was declined)                  | `failure`            |
+| `void`       | These payments do NOT count against order total            | `void`               |
+| `completed`  | These payments count against order total                   | `complete`           |
+
+## Merchant Account (FYI)
 * A bank account that allows accepting credit card payments
 * An Internet merchant account allows accepting payments online without having the customer's
 credit card physically in front of you
