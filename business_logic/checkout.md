@@ -125,9 +125,8 @@ registration step if necessary
   * Incomplete/abandoned orders can be filtered during reporting and it's possible to write a quick script
   to periodically purge incomplete orders
 
-## Checkout Customization
-
-#### 1) Adding Logic Before or After a Step
+### *Customization Tips*
+#### Adding Logic Before or After a Step
 * `state_machine` gem allows implementing callbacks before or after transitioning to a particular
 step
 * The callbacks work similarly to [Active Record Callbacks]
@@ -147,7 +146,7 @@ Spree::Order.state_machine.before_transition :to => :delivery,
 ```
 This callback now prevents transitioning to `delivery` step if `valid_zip_code?` returned false
 
-#### 2) Customizing the View for a Step
+#### Customizing the View for a Step
 * Each default checkout steps has a partial under `app/views/spree/checkout`
 * Changing the view for a step is as simple as overriding its relevant partial
 * Alternatively, if the relevant partial has a usable theme hook, you can add your
@@ -180,7 +179,7 @@ using `remove_transition` method of the Checkout DSL
   * `checkout_steps`: Returns array list of all currently possible states of the checkout
   * `has_step?`: Used to check if the current order fulfills the requirements for a specific state
 
-### Checkout Flow Customization
+### *Customization Tips*
 To add or remove steps to the checkout flow, you can use the `insert_checkout_step` and
 `remove_checkout_step` helpers respectively
 
