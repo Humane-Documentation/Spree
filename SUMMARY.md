@@ -6,6 +6,7 @@
    * [Authentication](application/authentication.md)
    * [Authorization](application/authorization.md)
    * [APIs](application/apis.md)
+   * State Machine
 * [How-To](how_to)
    * [Install](how_to/installation.md)
    * [Configure Security](how_to/security.md)
@@ -150,3 +151,4 @@
    * [Variant](models/Variant.md)
    * [Zone](models/Zone.md)
    * [ZoneMember](models/ZoneMember.md)
+
