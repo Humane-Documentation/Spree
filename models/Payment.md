@@ -17,6 +17,8 @@
 * `cvv_response_message`
 
 ### States
+![](payment_states.png)
+
 | State        | Description                                                | Callable with        |
 |--------------|------------------------------------------------------------|----------------------|
 | `checkout`   | still in checkout                                          |                      |
