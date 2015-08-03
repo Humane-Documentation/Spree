@@ -32,20 +32,20 @@ server for a fraction of a second before it's discarded
 retailers to delay charging the customer until the purchase is fulfilled (shipped)
 * Not all gateways allow the two step process. Confirm with your payment gateway and doctor too
 
-### CC Processing Options
-#### Option 1: With Payment Profiles (Default)
-##### Payment Profiles
+## Processing
+### Payment Profiles vs No Payment Profiles
+#### Payment Profiles (Default)
 * Service provided by some payment gateways
 * Default checkout process in Spree assumes a gateway that allows for third party support for
 payment profiles
 
-##### Process
+###### Process
 * Credit card gateway stores the credit card information
 * Your application stores only a token that can be used to authorize future charges on that same
 card without having to actually store it
 * "token" is tied with your merchant account
 
-##### Benefits
+###### Benefits
 * Secure and PCI compliant means of storing the users credit card information
 * Users can make subsequent purchases without having to reenter their card info
 * Merchants can issue refunds to the credit card
@@ -55,7 +55,7 @@ gateway provider's website
 processed since card number is now stored and can be used to perform standard authorization/capture
 via the secure token provided by the gateway
 
-#### Option 2: Without Payment Profiles
+#### No Payment Profiles
 If you do not want to use Payment Profiles then you need to customize checkout since Spree
 discards CC info after [Payment step](checkout.md#Payment) and so card info will be lost
 before it's time to authorize it. In detail:
