@@ -1,8 +1,8 @@
 # Authentication
 
-## spree_auth_devise
+## spree_auth_devise (Gem)
 `spree_auth_devise` gem uses the authentication library
-[Devise](https://github.com/plataformatec/devise) which provides functionalities to Spree
+[Devise](https://github.com/plataformatec/devise/wiki) which provides functionalities to Spree
 such as:
 - Basic authentication
 - Strong password encryption (with ability to specify your algorithms)
@@ -58,7 +58,7 @@ Devise.setup do |config|
 end
 ```
 
-## Authentication Customization
+## *Customization Tips*
 ### Prerequisites
 * A Spree application
 * A model representing users(doesn't need to be called `User`) whether provided by gems such as
