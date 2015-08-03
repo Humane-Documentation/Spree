@@ -65,7 +65,8 @@ before it's time to authorize it. In detail:
 
 This is secure since CC information is transmitted to the gateway and then discarded
 
-### Customization: Payment Profiles
+### *Customization Tips*
+#### Payment Profiles
 * All `Gateway` classes have a `payment_profiles_supported?` method which indicates whether or
 not payment profiles are supported
 * If you are adding Spree support to a `Gateway` you should also implement the `create_profile`
