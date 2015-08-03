@@ -17,16 +17,7 @@
 * `cvv_response_message`
 
 ### States
-![](payment_states.png)
 
-| State        | Description                                                | Callable with        |
-|--------------|------------------------------------------------------------|----------------------|
-| `checkout`   | still in checkout                                          |                      |
-| `processing` | Temporary state to prevent double submission               | `started_processing` |
-| `pending`    | Processed but incomplete (eg. authorized but not captured) | `pend`               |
-| `failed`     | Payment rejected (e.g. card was declined)                  | `failure`            |
-| `void`       | These payments do NOT count against order total            | `void`               |
-| `completed`  | These payments count against order total                   | `complete`           |
 
 ## Modules
 * [Processing](Payment/Processing.md)
