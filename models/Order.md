@@ -47,30 +47,6 @@ A new order is initiated when a customer places a product in their shopping cart
 * `display_total`: Same as above for `total`
 * `display_outstanding_balance`: Same as above for `outstanding_balance`
 
-## Order States
-![](checkout_states.png)
-1. `cart`: One or more products have been added to the shopping cart
-2. `address`: Order is awaiting billing and shipping address data
-3. `delivery`: Order is awaiting shipping method selection
-4. `payment`: Order is awaiting payment data. Triggered if `payment_required?` returns `true`
-5. `confirm`: Order is awaiting confirmation. Triggered if `confirmation_required?` returns `true`
-6. `complete`:  reached in one of two ways:
-    * No payment is required on the order
-    * Payment is required on the order, and at least the order total has been received as payment
-
-* An order cannot continue to the next state until the previous state has been satisfied
-* you can transition an order by calling `next` on it. If `false` returns, then it doesn't meet
-the criteria for the next state. Check the result of the `errors` method call
-* Intermediary states can be configured using the Checkout Flow API (checkout)
-
-## Order Statuses
-Statuses include all order states and add to them:
-* `canceled`: Either customer or store admin has chosen to cancel the order
-* `awaiting return`: Customer has elected to return products, but they have not yet been received.
-* `return`: Return has been processed
-* `resumed`: Formerly canceled order has been reactivated
-
-
 ## Modules
 * [Checkout](Order/Checkout.md)
 * [CurrencyUpdater](Order/CurrencyUpdater.md)
