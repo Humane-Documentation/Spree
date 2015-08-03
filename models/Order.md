@@ -48,6 +48,7 @@ A new order is initiated when a customer places a product in their shopping cart
 * `display_outstanding_balance`: Same as above for `outstanding_balance`
 
 ## Order States
+![](checkout_states.png)
 1. `cart`: One or more products have been added to the shopping cart
 2. `address`: Order is awaiting billing and shipping address data
 3. `delivery`: Order is awaiting shipping method selection
