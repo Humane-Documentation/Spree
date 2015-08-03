@@ -11,11 +11,10 @@
 
 > For a specific API, see its related guide or [controller documentation](/../Controllers/README.md)
 
-* Spree currently supports RESTful access to the resources listed
-* This API was built using the great [Rabl](https://github.com/nesquena/rabl) gem. Please 
-consult its documentation if you wish to understand how the templates use it to return data.
+* Spree API uses JSON and currently supports RESTful access to the resources listed
+* This API was built using the [Rabl](https://github.com/nesquena/rabl) gem. Please 
+consult its documentation if you wish to understand how the templates use it to return data
 * Spree API conforms to a set of [rules](#rules)
-* Spree API uses JSON
 
 ## Making an API Call
 You will need an authentication token to access the API. These keys can be generated on the
