@@ -29,14 +29,18 @@ the next state's criteria. Check the `errors` message
 
 ## Order Statuses
 Include order states in adddition to:
-* `canceled`: Either customer or store admin has chosen to cancel the order
-* `awaiting return`: Customer has elected to return products, but they have not yet been received.
-* `return`: Return has been processed
-* `resumed`: Formerly canceled order has been reactivated
+
+| Status            | Description                                                             |
+|-------------------|-------------------------------------------------------------------------|
+| `canceled`        | Either customer or store admin has chosen to cancel the order           |
+| `awaiting return` | Customer elected to return products, but they haven't yet been received |
+| `return`          | Return has been processed                                               |
+| `resumed`         | Formerly canceled order has been reactivated                            |
 
 
 ## Order & Addresses
 An order can link to two `Address` objects:
+
 1. The shipping address indicates where the order's product(s) should be shipped to determines
 shipping methods available
 2. The billing address indicates where the user paying for the order is and can alter the tax
