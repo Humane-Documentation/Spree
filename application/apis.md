@@ -60,7 +60,7 @@ The following are some simple rules that all Spree API endpoints comply with.
 11. If a resource can not be found, the API will return a status of 404.
 12. Unauthorized requests will be met with a 401 response.
 
-## Customizing Responses
+## *Customization Tips*
 If you wish to customize the responses from the API, you can do this in one of two ways:
 overriding the template, or providing a custom template.
 
