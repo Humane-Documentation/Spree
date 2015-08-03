@@ -1,6 +1,7 @@
 [Index](../_index.md) » Ability
 
 # (Class) [Spree::Ability](http://m.gymplayer.com/ability.rb)
+> Ability is document under [Authorization](../../authorization)
 
 ## Constructor
 ###  `[Ability]()`) **initialize**(user)

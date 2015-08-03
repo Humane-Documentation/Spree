@@ -1,5 +1,12 @@
 ## [Spree::User](https://github.com/spree/spree_auth_devise/tree/master/app/models/spree/user.rb)
-Exists under [spree_auth_devise](https://github.com/spree/spree_auth_devise) gem
+
+> IMPORTANT: This model exists in Spree in two ways:
+* Under Spree Core with class name `Spree.user_class.to_s`
+* Under [spree_auth_devise](https://github.com/spree/spree_auth_devise) gem as `Spree::User`
+Most of the time you'll use the one under core, e.g.
+```
+belongs_to :user, :class_name => Spree.user_class.to_s
+```
 
 ### Attributes
 * `encrypted_password`
@@ -30,12 +37,7 @@ Exists under [spree_auth_devise](https://github.com/spree/spree_auth_devise) gem
 * `confirmed_at`
 * `confirmation_sent_at`
 
-
-
-
-### Attributes `tokenized_permissions`
+### Related Attributes `tokenized_permissions`
 * `permissable_id`
 * `permissable_type`
 * `token`
-
-

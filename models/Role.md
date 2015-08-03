@@ -7,10 +7,10 @@
 * `editable`
 * `is_default`
 
-### Attributes `roles_users`
+### Related Attributes `roles_users`
 * `role_id`
 * `user_id`
 
-### Attributes `roles_permissions`
+### Related Attributes `roles_permissions`
 * `role_id`
 * `permission_id`

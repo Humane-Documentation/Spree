@@ -2,7 +2,7 @@
 
 # (Class) [Spree::ProductOptionType](http://m.gymplayer.com/product_option_type.rb)
 
-### Attributes `product_option_types`
+### Attributes
 * `position`
 * `product_id`
 * `option_type_id`
