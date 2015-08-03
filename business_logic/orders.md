@@ -17,7 +17,16 @@ shipping methods available
 2. The billing address indicates where the user paying for the order is and can alter the tax
 rate which can change the final order total
 
-## Updating an Order
+## Order Manual Entry
+* Can be done through the Admin Interface (Orders -> New Order)
+* Visually detailed in [Spree User Guide]
+(https://guides.spreecommerce.com/user/entering_orders.html)
+
+## Order Returns
+See it under [Inventory Guide](../controllers/Inventory.md#Returns)
+
+## *Customization Tips*
+### Updating an Order
 If you change an `Order` object in code in anyway and you want to update totals and associated
 adjustments and shipments, call `update!` method on the object (this will call `OrderUpdater`)
 
@@ -28,11 +37,3 @@ recalculated for that order.
 Another example is if a `LineItem` within the order had its price changed. Calling `update!` will
 cause the totals for the order to be updated, the adjustments for the order to be recalculated, and
 then a final total to be established.
-
-## Order Manual Entry
-* Can be done through the Admin Interface (Orders -> New Order)
-* Visually detailed in [Spree User Guide]
-(https://guides.spreecommerce.com/user/entering_orders.html)
-
-## Order Returns
-See it under [Inventory Guide](../controllers/Inventory.md#Returns)
