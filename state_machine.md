@@ -1,4 +1,4 @@
-# spree-state_machine
+# spree-state_machine (gem)
 
 Creating multiple boolean attributes to deciding how to behave based 
 on the values to keep state of an object can become cumbersome and
