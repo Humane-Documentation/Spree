@@ -10,6 +10,8 @@ With the exception of Registration, each step here corresponds to a state of `Or
 4. Payment
 5. Confirmation
 
+![](checkout_states.png)
+
 #### Step 1: Registration
 * Prior to checkout, user will be prompted to login, create a new account or a select
 "guest checkout" which allows users to specify only their email
