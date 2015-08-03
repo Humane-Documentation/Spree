@@ -59,7 +59,7 @@ permissions to perform those actions
 * This authentication has to occur on every request made through the REST API as no session
  or cookies are created or stored for a REST API
 
-## Authorization Customization
+## *Customization Tips*
 ### From the Application
 > Taken from spree_auth_devise README
 
