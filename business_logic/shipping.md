@@ -177,7 +177,8 @@ package will be created so that all packages weigh less than the threshold.
 * Weight threshold defaults to `150` and is changed through `Stock::Splitter::Weight.threshold`  in
 an initializer
 
-##### Custom Splitters
+##### *Customization Tips*
+###### Custom Splitters
 1. Inherit from `Stock::Splitter::Base`. For an example of a simple splitter, take a look at
 [weight based splitter] which pulls items with a weight greater than 150 into their own shipment
 2. Add the following to your application's spree initializer:
@@ -210,7 +211,8 @@ the correct number of items
 * If you want to customize which packages take priority for the order you can override
 `sort_packages` method in `Stock::Prioritizer`
 
-##### Customizing the Adjuster
+##### *Customization Tips*
+###### Customizing the Adjuster
 The `Adjuster` visits each package in an order and ensures the correct number of items are in each
 package. To customize this functionality, you need to do two things:
     1. Subclass `Stock::Adjuster` class and override `adjust` method to get the desired functionality
