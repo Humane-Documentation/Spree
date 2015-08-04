@@ -1,8 +1,6 @@
 # Summary
 
 * [Table of Content](README.md)
-* [Related](related.md)
-   * [State Machine](related/state_machine.md)
 * [Application](application)
    * [Code Structure](application/code_structure.md)
    * [Authentication](application/authentication.md)
@@ -56,6 +54,8 @@
    * [Variants API](controllers/variants_controller.md)
    * [Zones API](controllers/zones_controller.md)
    * [CheckoutController](controllers/frontend/checkout_controller.md)
+* [Related](related.md)
+   * [State Machine](related/state_machine.md)
 * [Models](models)
    * [Ability](models/Ability.md)
    * [Address](models/Address.md)
