@@ -26,7 +26,7 @@ Detailed under [Inventory Guide](../controllers/Inventory.md#Returns)
 
 ## `Order` Model & State Machine
 * `Spree::Order` state machine is the foundation of the checkout process and it utilizes
-[state_machine](https://github.com/pluginaweek/state_machine) gem (used in other places too such as `Spree::Shipment` and `Spree::InventoryUnit`)
+[state_machine](https://github.com/pluginaweek/state_machine) gem (used in `Spree::Shipment` and `Spree::InventoryUnit` too)
 * Checkout flow is defined in `app/models/spree/order/checkout.rb`
 * A `Spree::Order` object has an initial state of 'cart'
 * Various events transition `Spree::Order` to different order states
@@ -74,9 +74,7 @@ With the exception of Registration, each step here corresponds to a state of `Or
 
 #### Step 1: Registration
 * Prior to checkout, user will be prompted to login, create a new account or a select
-"guest checkout" which allows users to specify only their email
-* Spree allows guest checkout by default. Use the `allow_guest_checkout` preference to change the
-default setting
+"guest checkout" which allows users to specify only their email (use [Spree configurations](preferences_guide.md#Spree_Configuration_Options) to control guest checkout)
 * `spree_auth_devise` gem adds `check_registration` before filter to all `CheckoutController`
 actions (except `registration` and `update_registration` actions), which redirects to a registration
 page unless one of the following is true:
