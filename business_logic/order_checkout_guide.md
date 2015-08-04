@@ -142,7 +142,7 @@ Spree::Order.state_machine.before_transition :to => :delivery,
 ```
 This callback now prevents transitioning to `delivery` step if `valid_zip_code?` returned false
 
-### Customizing the View for a Step
+### Customizing the View for an Existing States
 * Each default checkout steps has a partial under `app/views/spree/checkout`
 * Changing the view for a step is as simple as overriding its relevant partial
 * Alternatively, if the relevant partial has a usable theme hook, you can add your
@@ -175,15 +175,15 @@ using `remove_transition` method of the Checkout DSL
   * `checkout_steps`: Returns array list of all currently possible states of the checkout
   * `has_step?`: Used to check if the current order fulfills the requirements for a specific state
 
-#### Adding Steps with `insert_checkout_step` Helper
-Takes a `before` or `after` option to determine where to insert the step:
+#### Adding States with `insert_checkout_step` Helper
+Takes a `before` or `after` option to determine where to insert the state:
 ```
 insert_checkout_step :new_step, :before => :address
 # or
 insert_checkout_step :new_step, :after => :address
 ```
 ##### Step View
-A view partial is needed for the checkout controller to load the new step. In our example we'll create a `spree/checkout/_new_step.html.erb` partial.
+A view partial is needed for the checkout controller to load the new state. In our example we'll create a `spree/checkout/_new_step.html.erb` partial.
 
 ##### Step "Breadcrumb"
 Spree automatically creates a progress "breadcrumb" based on available checkout states from
@@ -198,7 +198,7 @@ en:
 nor does every state need to be represented. Feel free to customize this behavior as well.
 
 
-#### Removing Steps with `remove_checkout_step` Helper
+#### Removing States with `remove_checkout_step` Helper
 Removes just one checkout step at a time:
 ```
 remove_checkout_step :address
@@ -209,7 +209,7 @@ fill in their payment details and then (potentially) confirm the order. This is 
 If they're not required to provide payment or confirmation for this order then checking out this
 order results in immediate completion.
 
-#### Rearrange Steps with `checkout_flow` Helper
+#### Rearrange States with `checkout_flow` Helper
 completely redefines the flow of the checkout:
 ```
 checkout_flow do
