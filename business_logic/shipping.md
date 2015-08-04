@@ -18,7 +18,7 @@ Each shipping method is assigned a single Calculator to calculate its shipping a
 
 > See [Calculators Guide](calculators.md)
 
-## Shipment Setup Examples
+## Store Shipment Arrangement Examples
 ### Simple Setup
 * Bruce Wayne Enterprises sells suits to US and Europe
 * Bruce ships from a single location
@@ -71,32 +71,27 @@ imposed by common carriers, bulk orders, etc.
 * Admins update `Shipment` record with actual shipping cost and a tracking code and can also confirm
 the dispatch (only once)
 
-## Product Configuration
-* Order shipments contain standard information such as:
-    * Shipping address
-    * Variants and quantities
+## Product Shipping Configuration
+* Shipments contain information such as:
+    * Shipping Address
+    * Variants and their quantities
     * Weight and dimension info for a variant (if available)
 * Product's `ShippingCategory` adds product-specific info for shipping calculations
 * `ShippingCategory` is a wrapper of a string from which a calculator could extract shipping prices
 e.g. "Fixed $20", "Fixed $40"..
-* Admins can assign products to ShippingCategories or include additional info in variants that
+* Admins can assign products to `ShippingCategories` or include additional info in variants that
 enable the calculator to determine results
 
-### Variant Configuration
+### Variant Shipping Configuration
 Variants can have weight and dimension info that several shipping method calculators use if present
 
 ## Shipping Instructions
 * `Config[:shipping_instructions]` controls collection of additional shipping instructions. This is
 turned off (`false`) by default
-* If an order has shipping instructions attached they'll be shown in the order's shipment admin page
 * Instructions are currently attached to order and not to shipments
+* If an order has shipping instructions attached they'll be shown in the order's shipment admin page
 
-## The Active Shipping Extension
-`spree_active_shipping` extension uses `active_shipping` gem to interface with carrier APIs such as
-USPS, Fedex and UPS to provide Spree-compatible calculators for the different delivery services of
-those carriers. More at https://github.com/spree/spree_active_shipping
-
-## Split Shipments
+## Splitting Shipments
 ### Creating Proposed Shipments
 1. Determining shipments for an order is triggered by calling `create_proposed_shipments` on an
 `Order` object while transitioning to `delivery` state during checkout. This deletes any existing
@@ -156,6 +151,11 @@ the correct number of items
 #### 4) The Estimator
 `Stock::Estimator` loops through packages created by the packer to calculate and attach shipping
 rates to them so the user so they can select shipments for their order
+
+## The Active Shipping Extension
+`spree_active_shipping` extension uses `active_shipping` gem to interface with carrier APIs such as
+USPS, Fedex and UPS to provide Spree-compatible calculators for the different delivery services of
+those carriers. More at https://github.com/spree/spree_active_shipping
 
 ## *Customization Tips*
 
