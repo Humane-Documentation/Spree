@@ -96,39 +96,6 @@ turned off (`false`) by default
 USPS, Fedex and UPS to provide Spree-compatible calculators for the different delivery services of
 those carriers. More at https://github.com/spree/spree_active_shipping
 
-## Filtering Shipping Methods On Criteria Other Than Zone
-Ordinarily, zone of the shipping address determines available shipping methods:
-```
-class Spree::Stock::Estimator
-  def shipping_methods(package)
-    shipping_methods = package.shipping_methods
-    shipping_methods.delete_if { |ship_method| !ship_method.calculator.available?(package.contents)}
-    shipping_methods.delete_if { |ship_method| !ship_method.include?(order.ship_address) }
-    shipping_methods.delete_if { |ship_method| !(ship_method.calculator.preferences[:currency].nil?
-    || ship_method.calculator.preferences[:currency] == currency) }
-    shipping_methods
-  end
-end
-```
-To disable a shipping method, calculator's `available?` method must be overridden:
-```
-class Calculator::Usps::FirstClassMailParcels < Calculator::Usps::Base
-  def self.description
-    "USPS First-Class Mail Parcel"
-  end
-  def available?(order)
-    multiplier = 1.3
-    weight = order.line_items.inject(0) do |weight, line_item|
-      weight + (line_item.variant.weight ? (line_item.quantity
-                                          * line_item.variant.weight
-                                          * multiplier) : 0)
-    end
-    #if weight in ounces > 13, then First Class Mail is not available for the order
-      weight > 13 ? false : true
-  end
-end
-```
-
 ## Split Shipments
 ### Creating Proposed Shipments
 1. Determining shipments for an order is triggered by calling `create_proposed_shipments` on an
@@ -177,8 +144,56 @@ package will be created so that all packages weigh less than the threshold.
 * Weight threshold defaults to `150` and is changed through `Stock::Splitter::Weight.threshold`  in
 an initializer
 
-##### *Customization Tips*
-###### Custom Splitters
+#### 3) The Prioritizer
+* Decides which `StockLocation` should ship which package from an order to come up with the best
+shipping situation available to the user
+* By default, Prioritizer first selects packages where products are on hand. Then it finds packages
+where items are backordered. During this, `Stock::Adjuster` is also used to ensure each package has
+the correct number of items
+* If you want to customize which packages take priority for the order you can override
+`sort_packages` method in `Stock::Prioritizer`
+
+#### 4) The Estimator
+`Stock::Estimator` loops through packages created by the packer to calculate and attach shipping
+rates to them so the user so they can select shipments for their order
+
+## *Customization Tips*
+
+### Filtering Shipping Methods On Criteria Other Than Zone
+Ordinarily, zone of the shipping address determines available shipping methods:
+```
+class Spree::Stock::Estimator
+  def shipping_methods(package)
+    shipping_methods = package.shipping_methods
+    shipping_methods.delete_if { |ship_method| !ship_method.calculator.available?(package.contents)}
+    shipping_methods.delete_if { |ship_method| !ship_method.include?(order.ship_address) }
+    shipping_methods.delete_if { |ship_method| !(ship_method.calculator.preferences[:currency].nil?
+    || ship_method.calculator.preferences[:currency] == currency) }
+    shipping_methods
+  end
+end
+```
+To disable a shipping method, calculator's `available?` method must be overridden:
+```
+class Calculator::Usps::FirstClassMailParcels < Calculator::Usps::Base
+  def self.description
+    "USPS First-Class Mail Parcel"
+  end
+  def available?(order)
+    multiplier = 1.3
+    weight = order.line_items.inject(0) do |weight, line_item|
+      weight + (line_item.variant.weight ? (line_item.quantity
+                                          * line_item.variant.weight
+                                          * multiplier) : 0)
+    end
+    #if weight in ounces > 13, then First Class Mail is not available for the order
+      weight > 13 ? false : true
+  end
+end
+```
+
+
+### Custom Splitters
 1. Inherit from `Stock::Splitter::Base`. For an example of a simple splitter, take a look at
 [weight based splitter] which pulls items with a weight greater than 150 into their own shipment
 2. Add the following to your application's spree initializer:
@@ -202,17 +217,7 @@ Rails.application.config.spree.stock_splitters = []
 5. If you want to add different splitters for each `StockLocation`, you need to decorate the
 `Stock::Coordinator` class and override the `splitters` method
 
-#### 3) The Prioritizer
-* Decides which `StockLocation` should ship which package from an order to come up with the best
-shipping situation available to the user
-* By default, Prioritizer first selects packages where products are on hand. Then it finds packages
-where items are backordered. During this, `Stock::Adjuster` is also used to ensure each package has
-the correct number of items
-* If you want to customize which packages take priority for the order you can override
-`sort_packages` method in `Stock::Prioritizer`
-
-##### *Customization Tips*
-###### Customizing the Adjuster
+### Customizing the Adjuster
 The `Adjuster` visits each package in an order and ensures the correct number of items are in each
 package. To customize this functionality, you need to do two things:
     1. Subclass `Stock::Adjuster` class and override `adjust` method to get the desired functionality
@@ -226,7 +231,3 @@ Spree::Stock::Coordinator.class_eval do
   end
 end
 ```
-
-#### 4) The Estimator
-`Stock::Estimator` loops through packages created by the packer to calculate and attach shipping
-rates to them so the user so they can select shipments for their order
