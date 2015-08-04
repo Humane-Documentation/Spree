@@ -152,5 +152,4 @@
    * [Zone](models/Zone.md)
    * [ZoneMember](models/ZoneMember.md)
 * [State Machine](related/state_machine.md)
-* Related
 
