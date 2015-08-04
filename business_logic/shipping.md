@@ -13,21 +13,34 @@ See [here](../models/Zone.md)
 ### Shipping Category (Model)
 See [here](../models/ShippingCategory.md)
 
-### Calculators
+## Calculators
 Each shipping method is assigned a single Calculator to calculate its shipping amount
 
 > See [Calculators Guide](calculators.md)
 
-## Store Shipment Arrangement Examples
-### Simple Setup
+## Shipping State
+Just as an order might have more than one payment, it might have more than one
+shipment. Different items might need to be shipped by different methods, or you may
+want to deliver stock on hand immediately while you backorder other items. For the
+sake of this document, however, we’ll assume everything can be done in a single
+shipment.
+Combined, the shipments determine the shipping state for the whole order, and you’ll
+most often see the states:
+● Ready when stock is on hand and the order can be shipped
+● Backorder when some items need to be backordered
+● Shipped when you’ve confirmed that all shipments have been made
+
+## Store Shipment Arrangements
+### Simple Arrangement Example
 * Bruce Wayne Enterprises sells suits to US and Europe
 * Bruce ships from a single location
 * Bruce works with 2 carriers:
     * USPS Ground (to US): charges $5 for first suit and $2 for each additional
     * FedEx (to EU): charges $10 each
 
-Spree Setup:
-* 1 Shipping Category: Products are similar so a single category all products are assigned to suffice
+##### Setting up Spree:
+Create:
+* 1 Shipping Category: Products are similar so a single category suffice
 * 1 Stock Location: Bruce ships all items from one location (cave) so he can use spree's default
 * 2 Shipping Methods (Configuration->Shipping Methods) as follows:
 
@@ -36,7 +49,7 @@ Spree Setup:
 | USPS Ground | US     | Flexi Rate($5,$2)      |
 | FedEx       | EU_VAT | FlatRate-per-item($10) |
 
-### Advanced Setup
+### Advanced Arrangement Example
 * Wayne Enterprises stopped EU operations as their suits were deemed "conspicuous religious symbols"
 * Bruce now sells products to a single zone (US)
 * Bruce ships from 2 locations (Stock Locations):
@@ -51,7 +64,8 @@ Spree Setup:
     * DHL: Charges $5 for light or regular and $50 for heavy
     * USPS: Charges $8 for light or regular and $20 for heavy
 
-Spree Setup:
+##### Setting up Spree:
+Create:
 * 4 Shipping Categories: Default, Light, Regular and Heavy
 * 3 Shipping Methods (Configuration->Shipping Methods): FedEx, DHL, USPS
 * 2 Stock Locations (Configuration->Stock Locations): Gotham, Los Angeles
@@ -61,9 +75,6 @@ Spree Setup:
 | Light              | Per Item ($5)  | Flat Rate ($10)     | Per Item ($8)  |
 | Regular            | Per Item ($5)  | Per Item ($2)       | Per Item ($8)  |
 | Heavy              | Per Item ($50) | Flexi Rate($20,$15) | Per Item ($20) |
-
-> There are a few extensions which provide additional shipping methods, including support for fees
-imposed by common carriers, bulk orders, etc.
 
 ## UI
 * Dispatch confirmation causes a shipping date to be set as the time of confirmation and Shipment
@@ -156,6 +167,9 @@ rates to them so the user so they can select shipments for their order
 `spree_active_shipping` extension uses `active_shipping` gem to interface with carrier APIs such as
 USPS, Fedex and UPS to provide Spree-compatible calculators for the different delivery services of
 those carriers. More at https://github.com/spree/spree_active_shipping
+
+> There are a few extensions which provide additional shipping methods, including support for fees
+imposed by common carriers, bulk orders, etc.
 
 ## *Customization Tips*
 
