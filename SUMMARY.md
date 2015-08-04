@@ -2,6 +2,7 @@
 
 * [Table of Content](README.md)
 * [Related](related.md)
+   * [State Machine](related/state_machine.md)
    * related
 * [Application](application)
    * [Code Structure](application/code_structure.md)
@@ -153,5 +154,4 @@
    * [Variant](models/Variant.md)
    * [Zone](models/Zone.md)
    * [ZoneMember](models/ZoneMember.md)
-* [State Machine](related/state_machine.md)
 
