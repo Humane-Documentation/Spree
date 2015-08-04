@@ -104,7 +104,7 @@ method in `Spree::Order`
 
 ## Checkout Controller
 Drives the state of an order during checkout
-
+> Documented [here](../controllers/frontend/checkout_controller.md)
 
 ## *Customization Tips*
 > Intermediary order states can be configured using the [Checkout Flow API](#Checkout_Flow_DSL)
