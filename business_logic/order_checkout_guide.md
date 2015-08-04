@@ -19,7 +19,7 @@ Detailed under [Inventory Guide](../controllers/Inventory.md#Returns)
 
 ## `Order` Model & State Machine
 * `Spree::Order` state machine is the foundation of the checkout process and it utilizes
-[state_machine](../application/state_machine.md) gem (used in `Spree::Shipment` and `Spree::InventoryUnit` too)
+[state_machine](../related/state_machine.md) gem (used in `Spree::Shipment` and `Spree::InventoryUnit` too)
 * Checkout flow is defined in `app/models/spree/order/checkout.rb`
 * A `Spree::Order` object has an initial state of 'cart'
 * Various events transition `Spree::Order` to different order states
