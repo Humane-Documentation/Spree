@@ -99,10 +99,6 @@ turned off (`false`) by default
 
 ## Splitting Shipments
 
-4. Available packages are converted to shipments on the order object
-5. Shipping rates are determined and inventory units are created
-6. Checkout process continue to delivery step
-
 > If Spree::Config.auto_capture_on_dispatch is set true it'll cause shipments to advance to ready
  state upon successfully authorizing payment for the order.  As each shipment is
 marked shipped the shipment's total will be captured from the authorization.
@@ -140,6 +136,14 @@ only have products of the same shipping category
 package will be created so that all packages weigh less than the threshold.
 * Weight threshold defaults to `150` and is changed through `Stock::Splitter::Weight.threshold`  in
 an initializer
+
+
+
+4. Available packages are converted to shipments on the order object
+5. Shipping rates are determined and inventory units are created
+6. Checkout process continue to delivery step
+
+
 
 #### 3) The Prioritizer
 * Decides which `StockLocation` should ship which package from an order to come up with the best
