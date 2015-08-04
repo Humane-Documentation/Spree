@@ -192,7 +192,6 @@ class Calculator::Usps::FirstClassMailParcels < Calculator::Usps::Base
 end
 ```
 
-
 ### Custom Splitters
 1. Inherit from `Stock::Splitter::Base`. For an example of a simple splitter, take a look at
 [weight based splitter] which pulls items with a weight greater than 150 into their own shipment
