@@ -6,7 +6,7 @@
    * [Authentication](application/authentication.md)
    * [Authorization](application/authorization.md)
    * [APIs](application/apis.md)
-   * [State Machine](application/state_machine.md)
+   * [State Machine](related/state_machine.md)
 * [How-To](how_to)
    * [Install](how_to/installation.md)
    * [Configure Security](how_to/security.md)
