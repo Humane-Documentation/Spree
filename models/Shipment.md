@@ -19,14 +19,8 @@ the order by calling `Shipment.find_by(number: number)`.=
 * `included_tax_total`
 * `pre_tax_amount`
 
-### States
-* `pending`: shipment has backordered inventory units and or order isn't paid
-* `ready`: shipment has no backordered inventory units and order is paid
-* `shipped`
-* `canceled`: All order shipments are cancelled and products will be restocked. Shipment resumes
-only if order is "resumed"
-
 > For more info see [Shipping Guide](../business_logic/shipping.md)
+
 ## Classes 
 * [ManifestItem](Shipment/ManifestItem.md)
 
