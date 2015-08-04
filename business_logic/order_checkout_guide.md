@@ -12,18 +12,17 @@ See [here](../models/Adjustment.md)
 
 ## Order & Addresses
 An order can link to two `Address` objects:
-
-1. The shipping address indicates where the order's product(s) should be shipped to determines
+1. **Shipping Address** indicates where the order's product(s) should be shipped to determines
 shipping methods available
-2. The billing address indicates where the user paying for the order is and can alter the tax
+2. **Billing Address** indicates where the user paying for the order is and can alter the tax
 rate which can change the final order total
 
 ## Order Manual Entry
 * Can be done through the Admin Interface (Orders -> New Order)
 * Visually detailed in [Spree User Guide](https://guides.spreecommerce.com/user/entering_orders.html)
 
-## Order Returns
-See it under [Inventory Guide](../controllers/Inventory.md#Returns)
+## Returns
+Detailed under [Inventory Guide](../controllers/Inventory.md#Returns)
 
 ## `Order` Model & State Machine
 * `Spree::Order` state machine is the foundation of the checkout process and it utilizes
@@ -65,9 +64,7 @@ Include order states in addition to:
 
 ## Checkout Steps
 With the exception of Registration, each step here corresponds to a state of `Order` object:
-
-1. Registration (only if using `spree_auth_devise`, toggled through
-`Spree::Auth::Config[:registration_step]` configuration setting)
+1. Registration (only if using `spree_auth_devise` gem)
 2. Address Information
 3. Delivery Options (Shipping Method)
 4. Payment
