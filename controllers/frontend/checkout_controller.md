@@ -24,9 +24,6 @@ current order state (e.g. `app/views/spree/checkout/address.html.erb`) showing o
 * Redirects to the next step unless `current_order.state` is `complete`, else redirect to the
   `order_path` for `current_order`
 
-> For security, `Spree::CheckoutController` will not update an order once checkout is complete.
-Therefore it's impossible for an order to be tampered with (e.g. changing quantity) after checkout.
-
 ## Routes
 * `get '/checkout', :to => 'checkout#edit', :as => :checkout`
 
