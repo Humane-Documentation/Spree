@@ -19,7 +19,7 @@ Detailed under [Inventory Guide](../controllers/Inventory.md#Returns)
 
 ## `Order` Model & State Machine
 * `Spree::Order` state machine is the foundation of the checkout process and it utilizes
-[state_machine](https://github.com/pluginaweek/state_machine) gem (used in `Spree::Shipment` and `Spree::InventoryUnit` too)
+[state_machine](../application/state_machine.md) gem (used in `Spree::Shipment` and `Spree::InventoryUnit` too)
 * Checkout flow is defined in `app/models/spree/order/checkout.rb`
 * A `Spree::Order` object has an initial state of 'cart'
 * Various events transition `Spree::Order` to different order states
@@ -101,6 +101,9 @@ Shipping methods available will depended on the shipping address
 * Disabled by default (except for payment methods that support
 payment profiles), but can be enabled by overriding `confirmation_required?`
 method in `Spree::Order`
+
+> For security, `Spree::CheckoutController` will not update an order once checkout is complete.
+Therefore it's impossible for an order to be tampered with (e.g. changing quantity) after checkout.
 
 ## Checkout Controller
 Drives the state of an order during checkout
