@@ -17,20 +17,10 @@ See [here](../models/Adjustment.md)
 ## Returns
 Detailed under [Inventory Guide](../controllers/Inventory.md#Returns)
 
-## `Order` Model & State Machine
-* `Spree::Order` state machine is the foundation of the checkout process and it utilizes
+## `Order` Model, Checkout Flow & State Machine
+* `Order` state machine is the foundation of the checkout flow process and it utilizes
 [state_machine](../related/state_machine.md) gem (used in `Spree::Shipment` and `Spree::InventoryUnit` too)
 * Checkout flow is defined in `app/models/spree/order/checkout.rb`
-* A `Spree::Order` object has an initial state of 'cart'
-* Various events transition `Spree::Order` to different order states
-* There's no separate model or DB table for a 'cart' so the "shopping cart" is
-  actually a `Spree::Order`
-* An order cannot continue to the next state until the previous state has been satisfied
-* you can transition an order by calling `next` on it. If `false` returns, then it doesn't meet
-the next state's criteria. Check the `errors` message
-* An order is considered in-progress or incomplete when its `completed_at` attribute is `nil`
-* Incomplete/abandoned orders can be filtered during reporting and it's possible to write a quick script to periodically purge them
-
 
 ### Order States
 ![](order_states.png)
@@ -44,6 +34,17 @@ the next state's criteria. Check the `errors` message
 | `confirm`  | Awaiting confirmation. Triggered if `confirmation_required?` returns `true`    |
 | `complete` | No payment required on the order or at least its total was received as payment |
 
+* Most of these states/steps are about collecting info so “payment” state here is about collecting credit card details or similar, not processing the payment
+* Various events transition `Spree::Order` to different order states
+* There's no separate model or DB table for a 'cart' so the "shopping cart" is
+  actually a `Spree::Order`
+* An order cannot continue to the next state until the previous state has been satisfied
+* you can transition an order by calling `next` on it. If `false` returns, then it doesn't meet
+the next state's criteria. Check the `errors` message
+* When the order reaches the complete stage it's sent to be authorized, and shows up in the store’s admin interface
+* An order is considered in-progress or incomplete when its `completed_at` attribute is `nil`
+* Incomplete/abandoned orders can be filtered during reporting and it's possible to write a quick script to periodically purge them
+
 ### Order Statuses
 Include order states in addition to:
 
@@ -56,7 +57,7 @@ Include order states in addition to:
 
 
 ## Checkout Steps
-With the exception of Registration, each step corresponds to an `Order` state:
+Tracks what the customer sees. With the exception of Registration, each step corresponds to an `Order` state:
 1. Registration (only if using `spree_auth_devise` gem)
 2. Address Information
 3. Delivery Options (Shipping Method)
