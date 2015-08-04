@@ -28,7 +28,7 @@
    * [Order & Checkout Guide](business_logic/order_checkout_guide.md)
    * [Promotions](business_logic/promotions.md)
    * [Taxation](business_logic/taxation.md)
-   * [Payments](business_logic/payments.md)
+   * [Payments Guide](business_logic/payments_guide.md)
    * [Shipping](business_logic/shipping.md)
    * [Inventory](business_logic/inventory.md)
    * [Preferences Guide](business_logic/preferences_guide.md)
