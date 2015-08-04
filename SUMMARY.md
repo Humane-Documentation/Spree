@@ -1,7 +1,7 @@
 # Summary
 
 * [Table of Content](README.md)
-* Related
+* [Related](related.md)
 * [Application](application)
    * [Code Structure](application/code_structure.md)
    * [Authentication](application/authentication.md)
