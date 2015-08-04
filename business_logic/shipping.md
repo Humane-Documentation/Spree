@@ -139,10 +139,6 @@ an initializer
 
 
 
-4. Available packages are converted to shipments on the order object
-5. Shipping rates are determined and inventory units are created
-6. Checkout process continue to delivery step
-
 
 
 #### 3) The Prioritizer
@@ -155,8 +151,14 @@ the correct number of items
 `sort_packages` method in `Stock::Prioritizer`
 
 #### 4) The Estimator
-`Stock::Estimator` loops through packages created by the packer to calculate and attach shipping
+Loops through packages created by the packer to calculate and attach shipping
 rates to them so the user so they can select shipments for their order
+
+After the Estimator is done:
+* Available packages are converted to shipments on the order object
+* Shipping rates are determined and inventory units are created
+* Checkout process continue to delivery step
+
 
 ## The Active Shipping Extension
 `spree_active_shipping` extension uses `active_shipping` gem to interface with carrier APIs such as
