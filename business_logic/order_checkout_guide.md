@@ -63,7 +63,7 @@ Include order states in addition to:
 
 
 ## Checkout Steps
-With the exception of Registration, each step here corresponds to a state of `Order` object:
+With the exception of Registration, each step corresponds to an `Order` state:
 1. Registration (only if using `spree_auth_devise` gem)
 2. Address Information
 3. Delivery Options (Shipping Method)
