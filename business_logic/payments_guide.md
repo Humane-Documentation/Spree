@@ -115,21 +115,10 @@ objects to be stored in `spree_log_entries` table as a YAML log entry for the pa
 The states of all payments are combined to determine the overall payment state which
 is what the storekeeper sees on the main order admin page
 
-  * `balance_due`: Payment is required for this order
-  * `failed`: Last payment for this order failed
-  * `credit_owed`: This order has been paid for in excess of its total
-  * `paid`: Order has been paid for in full
-
-* `balance_due`: when there aren’t enough captured payments to meet the order
-total yet. This might mean that there’s an authorized payment ready to manually
-capture, or it may be that no payment has been made yet and the customer
-needs to be contacted to discuss the order
-* `paid`: when the captured payments cover the order. Payment is done and it’s
-time to ship the order
-* `credit_owed`: when the captured payments add up to more than the order total,
-and the customer is owed a refund. This might happen if items are removed
-from an order after it has been paid
-* `failed`: when the most recent payment for an order is in the failed state
+* `balance_due`: Payment is required for this order because there aren’t enough captured payments to meet the order total yet. This might mean there’s an authorized payment ready to manually capture, or it may be that no payment has been made yet
+* `paid`: Captured payments cover the order total. Payment is done
+* `credit_owed`: Captured payments add up to more than the order total so the customer is owed a refund. This might happen if items are removed from an order after it has been paid
+* `failed`: Last payment for this order failed
 
 ### Payment Log Entries
 Payment Log entries can be retrieved with a call to `log_entries` association on any `Payment` object.
