@@ -127,8 +127,8 @@ registration step if necessary
   * Incomplete/abandoned orders can be filtered during reporting and it's possible to write a quick script
   to periodically purge incomplete orders
 
-### *Customization Tips*
-#### Adding Logic Before or After a Step
+## *Customization Tips*
+### Adding Logic Before or After a Step
 * `state_machine` gem allows implementing callbacks before or after transitioning to a particular
 step
 * The callbacks work similarly to [Active Record Callbacks]
@@ -148,15 +148,15 @@ Spree::Order.state_machine.before_transition :to => :delivery,
 ```
 This callback now prevents transitioning to `delivery` step if `valid_zip_code?` returned false
 
-#### Customizing the View for a Step
+### Customizing the View for a Step
 * Each default checkout steps has a partial under `app/views/spree/checkout`
 * Changing the view for a step is as simple as overriding its relevant partial
 * Alternatively, if the relevant partial has a usable theme hook, you can add your
 functionality using [Deface](https://github.com/spree/deface)
 
-## Checkout Flow DSL
+### Checkout Flow DSL
 * Allows defining different checkout steps and customizing checkout flow without touching
-unrelated admin states (*such as "canceled" and "resumed" which an order can transition to*)
+unrelated admin states (such as `canceled` and `resumed` which an order can transition to)
 * Provides shorter syntax compared with overriding the entire `Spree::Order` state machine
 * default checkout flow is defined like this:
 ```
@@ -181,19 +181,30 @@ using `remove_transition` method of the Checkout DSL
   * `checkout_steps`: Returns array list of all currently possible states of the checkout
   * `has_step?`: Used to check if the current order fulfills the requirements for a specific state
 
-### *Customization Tips*
-To add or remove steps to the checkout flow, you can use the `insert_checkout_step` and
-`remove_checkout_step` helpers respectively
-
-#### `insert_checkout_step` Helper
+#### Adding Steps with `insert_checkout_step` Helper
 Takes a `before` or `after` option to determine where to insert the step:
 ```
 insert_checkout_step :new_step, :before => :address
 # or
 insert_checkout_step :new_step, :after => :address
 ```
+##### Step View
+A view partial is needed for the checkout controller to load the new step. In our example we'll create a `spree/checkout/_new_step.html.erb` partial.
 
-#### `remove_checkout_step` Helper
+##### Step "Breadcrumb"
+Spree automatically creates a progress "breadcrumb" based on available checkout states from
+`Spree::Order#checkout_steps` method. If you add a new state you'll want to add its translations
+in the relevant translation in `config/locales` directory of your extension or application:
+```
+en:
+  order_state:
+    new_step: New Step
+```
+> Use of the breadcrumb is entirely optional and doesn't need to correspond to checkout states
+nor does every state need to be represented. Feel free to customize this behavior as well.
+
+
+#### Removing Steps with `remove_checkout_step` Helper
 Removes just one checkout step at a time:
 ```
 remove_checkout_step :address
@@ -204,7 +215,7 @@ fill in their payment details and then (potentially) confirm the order. This is 
 If they're not required to provide payment or confirmation for this order then checking out this
 order results in immediate completion.
 
-#### `checkout_flow` Helper
+#### Rearrange Steps with `checkout_flow` Helper
 completely redefines the flow of the checkout:
 ```
 checkout_flow do
@@ -212,21 +223,3 @@ checkout_flow do
   go_to_state :complete
 end
 ```
-
-#### Checkout View
-After creating a checkout step, you'll need to create a partial for the checkout controller to
-load for your custom step. e.g. if your additional checkout step is `new_step` you'll need to a
-`spree/checkout/_new_step.html.erb` partial.
-
-#### Checkout "Breadcrumb"
-Spree automatically creates a progress "breadcrumb" based on available checkout states from
-`Spree::Order#checkout_steps` method. If you add a new state you'll want to add its translations
-in the relevant translation in `config/locales` directory of your extension or application:
-```
-en:
-  order_state:
-    new_step: New Step
-```
-
-> Use of the breadcrumb is entirely optional and doesn't need to correspond to checkout states
-nor does every state need to be represented. Feel free to customize this behavior as well.
