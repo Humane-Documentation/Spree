@@ -87,20 +87,18 @@ This redirects to a registration page unless one of the following is true:
 shipping methods available)
     2. **Billing Address** where the user paying for the order is (alters the tax
 rate which can change the final order total)
-* Users can click "use billing address" option to use the same address for both
+* Users can use the same address for both
+* Use [Spree configurations](preferences_guide.md#Spree_Configuration_Options) to control some address fields characteristics
 
 #### Step 3: Delivery Options
-Spree assumes the list of shipping methods to be dependent on the shipping address
+Shipping methods available will depended on the shipping address
 
 #### Step 4: Payment
-> See [Payments Guide](payments.md)
+> See [Payments Guide](payments_guide.md)
 
 #### Step 5: Confirmation
-* Final opportunity for the customer to review their order before
-submitting
-* Users can return to any step in the process using the back button or clicking on a step in the
-"progress breadcrumb"
-* This step is disabled by default (except for payment methods that support
+* Step where user reviews their order before submitting and can return to any step in the process using the back button or clicking on a step in the *progress breadcrumb*
+* Disabled by default (except for payment methods that support
 payment profiles), but can be enabled by overriding `confirmation_required?`
 method in `Spree::Order`
 
@@ -115,7 +113,7 @@ current order. e.g. if an order was in "address" state, a request would redirect
 
 * `get '/checkout/:state', :to => 'checkout#edit', :as => :checkout_state`
 
-Same as route above
+Same as previous route
 
 * `put '/checkout/update/:state', :to => 'checkout#update', :as => :update_checkout`
 
