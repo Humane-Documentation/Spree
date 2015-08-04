@@ -18,17 +18,16 @@ Each shipping method is assigned a single Calculator to calculate its shipping a
 
 > See [Calculators Guide](calculators.md)
 
-## Shipping State
-Just as an order might have more than one payment, it might have more than one
-shipment. Different items might need to be shipped by different methods, or you may
-want to deliver stock on hand immediately while you backorder other items. For the
-sake of this document, however, we’ll assume everything can be done in a single
-shipment.
-Combined, the shipments determine the shipping state for the whole order, and you’ll
-most often see the states:
-● Ready when stock is on hand and the order can be shipped
-● Backorder when some items need to be backordered
-● Shipped when you’ve confirmed that all shipments have been made
+### `Shipment` States
+* An order might have more than one shipment as different items might need different shipping methods, or to deliver stock on hand immediately while backordering other items
+* Combined, the shipments determine the shipping state for the whole order
+
+| State      | Description                                                                                    |
+|------------|------------------------------------------------------------------------------------------------|
+| `pending`  | Shipment has backordered inventory units and or order isn't paid                               |
+| `ready`    | Stock is on hand (no backordered inventory units) and order is paid                            |
+| `shipped`  | Admin confirmed all shipments                                                                  |
+| `canceled` | Order shipments are canceled and products will be restocked. Shipment resumes if order resumed |
 
 ## Store Shipment Arrangements
 ### Simple Arrangement Example
