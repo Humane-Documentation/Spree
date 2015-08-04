@@ -82,10 +82,6 @@ Create:
 the dispatch (only once)
 
 ## Product Shipping Configuration
-* Shipments contain information such as:
-    * Shipping Address
-    * Variants and their quantities
-    * Weight and dimension info for a variant (if available)
 * Product's `ShippingCategory` adds product-specific info for shipping calculations
 * `ShippingCategory` is a wrapper of a string from which a calculator could extract shipping prices
 e.g. "Fixed $20", "Fixed $40"..
