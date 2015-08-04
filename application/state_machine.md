@@ -313,7 +313,6 @@ end
 ```
 
 ### ActiveRecord
-
 * Adds support for database transactions, automatically saving the record, named scopes, validation errors, and observers
 * For more information about the various behaviors added for ActiveRecord state
 machines, see `StateMachine::Integrations::ActiveRecord`
@@ -363,12 +362,10 @@ end
 ```
 
 ### Other Integrations
-
 See original documentation
 
 
 ## Usage - Rails
-
 Integrating state_machine into your Ruby on Rails application is straightforward
 and provides a few additional features specific to the framework. To get
 started, following the steps below.
@@ -444,9 +441,6 @@ rake appraisal:active_record-2.0.0 test
 ```
 
 ## Caveats
-
-The following caveats should be noted when using state_machine:
-
 * Overridden event methods won't get invoked when using attribute-based event transitions
 * **JRuby / Rubinius**: around_transition callbacks in ORM integrations won't work on JRuby since it doesn't support continuations
 * **Factory Girl**: Dynamic initial states don't work because of the way factory_girl
@@ -601,14 +595,9 @@ v.state?(:parked)   # => true
 ```
 
 ### Syntax flexibility
-
-Although state_machine introduces a simplified syntax, it still remains
-backwards compatible with previous versions and other state-related libraries by
-providing some flexibility around how transitions are defined.  See below for an
-overview of these syntaxes.
+state_machine provide flexibility around how transitions are defined.
 
 #### Verbose syntax
-
 In general, it's recommended that state machines use the implicit syntax for
 transitions.  However, you can be a little more explicit and verbose about
 transitions by using the `:from`, `:except_from`, `:to`,
@@ -632,7 +621,6 @@ end
 ```
 
 #### Transition context
-
 Some flexibility is provided around the context in which transitions can be
 defined.  In almost all examples throughout the documentation, transitions are
 defined within the context of an event.  If you prefer to have state machines
@@ -696,7 +684,6 @@ Notice that in these alternative syntaxes:
 the `all`, `any`, and `same` helper methods
 
 ### Static / Dynamic definitions
-
 In most cases, the definition of a state machine is **static**.  That is to say,
 the states, events and possible transitions are known ahead of time even though
 they may depend on data that's only known at runtime.  For example, certain
