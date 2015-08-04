@@ -126,11 +126,10 @@ cause the totals for the order to be updated, the adjustments for the order to b
 then a final total to be established.
 
 
-### Adding Logic Before or After a Step
+### Adding Logic Before or After a State
 * `state_machine` gem allows implementing callbacks before or after transitioning to a particular
 step
-* The callbacks work similarly to [Active Record Callbacks]
-(http://guides.rubyonrails.org/active_record_callbacks.html) so you can specify a method or block
+* The callbacks work similarly to [Active Record Callbacks](http://guides.rubyonrails.org/active_record_callbacks.html) so you can specify a method or block
 of code to be executed prior to or after a transition
 * If the method executed in a `before_transition` returns false the transition will not execute
 
