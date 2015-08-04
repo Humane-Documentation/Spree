@@ -556,7 +556,6 @@ v.state?(:parked)   # => true
 ```
 ### Syntax flexibility
 state_machine provide flexibility around how transitions are defined.
-
 #### Verbose syntax
 In general, it's recommended that state machines use the implicit syntax for
 transitions.  However, you can be a little more explicit and verbose about
@@ -631,7 +630,6 @@ class Vehicle
 end
 ```
 Notice that in these alternative syntaxes:
-
 * You can continue to configure `:if` and `:unless` conditions
 * You can continue to define `from` states (when in the machine context) using
 the `all`, `any`, and `same` helper methods
@@ -643,7 +641,6 @@ they may depend on data that's only known at runtime.  For example, certain
 transitions may only be available depending on an attribute on that object it's
 being run on.  All of the documentation in this library define static machines
 like so:
-
 ```ruby
 class Vehicle
   state_machine :state, :initial => :parked do
