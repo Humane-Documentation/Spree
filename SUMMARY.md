@@ -54,6 +54,7 @@
    * [Users API](controllers/users_controller.md)
    * [Variants API](controllers/variants_controller.md)
    * [Zones API](controllers/zones_controller.md)
+   * CheckoutController
 * [Models](models)
    * [Ability](models/Ability.md)
    * [Address](models/Address.md)
