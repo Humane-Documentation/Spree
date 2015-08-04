@@ -13,17 +13,16 @@ registration step if necessary
 Since there is no "checkout" model, `CheckoutController` is not a typical RESTful controller and
 so `spree_core` and `spree_auth_devise` gems expose a few different actions for it:
 
-* `edit` action renders checkout/edit.html.erb template which then renders a partial with the
-current order state (e.g. `app/views/spree/checkout/address.html.erb`) showing order-state-specific
-fields for the user to fill in
-* `update` action:
-  * Updates `current_order` with parameters passed from the current step
-  * Transitions order state machine using `next` event after successfully updating the order
-  * Executes callbacks based on the new state after successfully transitioning
-  * Redirects to the next step unless `current_order.state` is `complete`, else redirect to the
-  `order_path` for `current_order`
+### `edit`
+Renders checkout/edit.html.erb template which then renders a partial with the
+current order state (e.g. `app/views/spree/checkout/address.html.erb`) showing order-state-specific fields for the user to fill in
 
-> If you add a new state to checkout flow you'll need a new partial for it
+### `update`
+* Updates `current_order` with parameters passed from the current step
+* Transitions order state machine using `next` event after successfully updating the order
+* Executes callbacks based on the new state after successfully transitioning
+* Redirects to the next step unless `current_order.state` is `complete`, else redirect to the
+  `order_path` for `current_order`
 
 > For security, `Spree::CheckoutController` will not update an order once checkout is complete.
 Therefore it's impossible for an order to be tampered with (e.g. changing quantity) after checkout.
