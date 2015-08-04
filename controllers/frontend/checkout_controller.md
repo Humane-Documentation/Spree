@@ -1,3 +1,5 @@
+# Checkout Controller
+
 ## Filters
 `spree_core` and `spree_auth_devise` gems define several `before_filters` for `Spree::CheckoutController`:
 
