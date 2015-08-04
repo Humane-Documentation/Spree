@@ -10,13 +10,6 @@ See [here](../models/LineItem.md)
 ### Adjustment (Model)
 See [here](../models/Adjustment.md)
 
-## Order & Addresses
-An order can link to two `Address` objects:
-1. **Shipping Address** indicates where the order's product(s) should be shipped to determines
-shipping methods available
-2. **Billing Address** indicates where the user paying for the order is and can alter the tax
-rate which can change the final order total
-
 ## Order Manual Entry
 * Can be done through the Admin Interface (Orders -> New Order)
 * Visually detailed in [Spree User Guide](https://guides.spreecommerce.com/user/entering_orders.html)
@@ -73,14 +66,8 @@ With the exception of Registration, each step corresponds to an `Order` state:
 ![](checkout_states.png)
 
 #### Step 1: Registration
-* Prior to checkout, user will be prompted to login, create a new account or a select
-"guest checkout" which allows users to specify only their email (use [Spree configurations](preferences_guide.md#Spree_Configuration_Options) to control guest checkout)
-* `spree_auth_devise` gem adds `check_registration` before filter to all `CheckoutController`
-actions (except `registration` and `update_registration` actions), which redirects to a registration page unless one of the following is true:
-    * `Spree::Auth::Config[:registration_step]` preference is not `true`
-    * user is already logged in
-    * current order has an email address associated with it
-* `check_registration` method is defined like this:
+`spree_auth_devise` gem adds a `check_registration` before filter to all `CheckoutController`
+actions (except `registration` and `update_registration` actions)
 ```
 def check_registration
   return unless Spree::Auth::Config[:registration_step]
@@ -89,21 +76,18 @@ def check_registration
   redirect_to spree.checkout_registration_path
 end
 ```
+This redirects to a registration page unless one of the following is true:
+* `Spree::Auth::Config[:registration_step]` preference is not `true`
+* user is already logged in
+* current order has an email address associated with it (use [Spree configurations](preferences_guide.md#Spree_Configuration_Options) to control guest checkout)
 
 #### Step 2: Address Information
-* Allows user to add both their billing and shipping information
-* Users can click "use billing address" option to use the same address for both. (Selecting this
-hides the shipping address fields using JavaScript)
-* State field can be disabled by using the `Spree::Config[:address_requires_state]` preference
-* You can allow an "alternate phone" field by using `Spree::Config[:alternative_shipping_phone]`
- and `Spree::Config[:alternative_shipping]` fields
-* The list of countries that appear in the country select box can also be configured. Spree will
-list all countries by default, but you can configure exactly which countries you would like to
-appear. The list can be limited to a specific set of countries by configuring the
-`Spree::Config[:checkout_zone]` preference and setting its value to the name of a [Zone]
-(../models/Zone.md) containing the countries you wish to use. Spree assumes that the list of
-billing and shipping countries will be the same. You can always change this logic via an
-extension if this does not suit your needs.
+* Allows user to add both their:
+    1. **Shipping Address** where the order's product(s) should be shipped (determines
+shipping methods available)
+    2. **Billing Address** where the user paying for the order is (alters the tax
+rate which can change the final order total)
+* Users can click "use billing address" option to use the same address for both
 
 #### Step 3: Delivery Options
 Spree assumes the list of shipping methods to be dependent on the shipping address
@@ -123,19 +107,17 @@ method in `Spree::Order`
 ## Checkout Architecture
 
 ### Checkout Routes
-Three routes in spree_core handle all of the routing for a checkout:
-
-1) `get '/checkout', :to => 'checkout#edit', :as => :checkout`
+* `get '/checkout', :to => 'checkout#edit', :as => :checkout`
 
 Maps to `edit` action of `CheckoutController` and requesting this redirects to current state of the
 current order. e.g. if an order was in "address" state, a request would redirect to
 `'/checkout/address'`
 
-2) `get '/checkout/:state', :to => 'checkout#edit', :as => :checkout_state`
+* `get '/checkout/:state', :to => 'checkout#edit', :as => :checkout_state`
 
 Same as route above
 
-3) `put '/checkout/update/:state', :to => 'checkout#update', :as => :update_checkout`
+* `put '/checkout/update/:state', :to => 'checkout#update', :as => :update_checkout`
 
 Maps to `CheckoutController#update` action which updates order data during checkout
 
