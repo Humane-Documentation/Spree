@@ -1,8 +1,8 @@
 # Summary
 
 * [Table of Content](README.md)
+   * [State Machine](related/state_machine.md)
    * Related
-* [State Machine](related/state_machine.md)
 * [Application](application)
    * [Code Structure](application/code_structure.md)
    * [Authentication](application/authentication.md)
