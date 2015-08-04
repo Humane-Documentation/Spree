@@ -76,8 +76,7 @@ With the exception of Registration, each step corresponds to an `Order` state:
 * Prior to checkout, user will be prompted to login, create a new account or a select
 "guest checkout" which allows users to specify only their email (use [Spree configurations](preferences_guide.md#Spree_Configuration_Options) to control guest checkout)
 * `spree_auth_devise` gem adds `check_registration` before filter to all `CheckoutController`
-actions (except `registration` and `update_registration` actions), which redirects to a registration
-page unless one of the following is true:
+actions (except `registration` and `update_registration` actions), which redirects to a registration page unless one of the following is true:
     * `Spree::Auth::Config[:registration_step]` preference is not `true`
     * user is already logged in
     * current order has an email address associated with it
@@ -124,7 +123,7 @@ method in `Spree::Order`
 ## Checkout Architecture
 
 ### Checkout Routes
-Three custom routes in spree_core handle all of the routing for a checkout:
+Three routes in spree_core handle all of the routing for a checkout:
 
 1) `get '/checkout', :to => 'checkout#edit', :as => :checkout`
 
