@@ -137,10 +137,6 @@ package will be created so that all packages weigh less than the threshold.
 * Weight threshold defaults to `150` and is changed through `Stock::Splitter::Weight.threshold`  in
 an initializer
 
-
-
-
-
 #### 3) The Prioritizer
 * Decides which `StockLocation` should ship which package from an order to come up with the best
 shipping situation available to the user
@@ -151,14 +147,13 @@ the correct number of items
 `sort_packages` method in `Stock::Prioritizer`
 
 #### 4) The Estimator
-Loops through packages created by the packer to calculate and attach shipping
+`Stock::Estimator` loops through packages created by the packer to calculate and attach shipping
 rates to them so the user so they can select shipments for their order
 
-After the Estimator is done:
+After the estimator is done:
 * Available packages are converted to shipments on the order object
 * Shipping rates are determined and inventory units are created
 * Checkout process continue to delivery step
-
 
 ## The Active Shipping Extension
 `spree_active_shipping` extension uses `active_shipping` gem to interface with carrier APIs such as
