@@ -102,27 +102,20 @@ Shipping methods available will depended on the shipping address
 payment profiles), but can be enabled by overriding `confirmation_required?`
 method in `Spree::Order`
 
-## Checkout Architecture
-
-### Checkout Routes
-* `get '/checkout', :to => 'checkout#edit', :as => :checkout`
-
-Maps to `edit` action of `CheckoutController` and requesting this redirects to current state of the
-current order. e.g. if an order was in "address" state, a request would redirect to
-`'/checkout/address'`
-
-* `get '/checkout/:state', :to => 'checkout#edit', :as => :checkout_state`
-
-Same as previous route
-
-* `put '/checkout/update/:state', :to => 'checkout#update', :as => :update_checkout`
-
-Maps to `CheckoutController#update` action which updates order data during checkout
-
-### Checkout Controller
+## Checkout Controller
 Drives the state of an order during checkout
 
-##### Actions
+
+### Filters
+`spree_core` and `spree_auth_devise` gems define several `before_filters` for `Spree::CheckoutController`:
+
+* `load_order`: Assigns `@order` instance variable and sets `@order.state` to `params[:state]` value.
+It also runs the "before" callbacks for the current state
+* `check_authorization`: Verifies that `current_user` has access to `current_order`
+* `check_registration`: Checks registration status of `current_user` and redirects to
+registration step if necessary
+
+### Actions
 Since there is no "checkout" model, `CheckoutController` is not a typical RESTful controller and
 so `spree_core` and `spree_auth_devise` gems expose a few different actions for it:
 
@@ -141,14 +134,21 @@ fields for the user to fill in
 > For security, `Spree::CheckoutController` will not update an order once checkout is complete.
 Therefore it's impossible for an order to be tampered with (e.g. changing quantity) after checkout.
 
-##### Filters
-`spree_core` and `spree_auth_devise` gems define several `before_filters` for `Spree::CheckoutController`:
+### Routes
+* `get '/checkout', :to => 'checkout#edit', :as => :checkout`
 
-* `load_order`: Assigns `@order` instance variable and sets `@order.state` to `params[:state]` value.
-It also runs the "before" callbacks for the current state
-* `check_authorization`: Verifies that `current_user` has access to `current_order`
-* `check_registration`: Checks registration status of `current_user` and redirects to
-registration step if necessary
+Maps to `edit` action of `CheckoutController` and requesting this redirects to current state of the
+current order. e.g. if an order was in "address" state, a request would redirect to
+`'/checkout/address'`
+
+* `get '/checkout/:state', :to => 'checkout#edit', :as => :checkout_state`
+
+Same as previous route
+
+* `put '/checkout/update/:state', :to => 'checkout#update', :as => :update_checkout`
+
+Maps to `CheckoutController#update` action which updates order data during checkout
+
 
 ## *Customization Tips*
 > Intermediary order states can be configured using the [Checkout Flow API](#Checkout_Flow_DSL)
