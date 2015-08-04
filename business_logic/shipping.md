@@ -98,13 +98,7 @@ turned off (`false`) by default
 * If an order has shipping instructions attached they'll be shown in the order's shipment admin page
 
 ## Splitting Shipments
-### Creating Proposed Shipments
-1. Determining shipments for an order is triggered by calling `create_proposed_shipments` on an
-`Order` object while transitioning to `delivery` state during checkout. This deletes any existing
-shipments for the order and determines possible shipments available
-2. `create_proposed_shipments` calls `Stock::Coordinator.new(@order).packages` which returns an
-array of packages
-3. A `Splitter` object determines which items belong in which package when they are being built
+
 4. Available packages are converted to shipments on the order object
 5. Shipping rates are determined and inventory units are created
 6. Checkout process continue to delivery step
@@ -115,14 +109,15 @@ marked shipped the shipment's total will be captured from the authorization.
 
 ### Components of Split Shipments
 #### 1) The Coordinator
-* Starting point for determining shipments when calling `create_proposed_shipments` on an order
+* Starting point for determining shipments when calling `create_proposed_shipments` on an order object while transitioning to `delivery` state during checkout (This deletes any existing
+shipments for the order)
 * Goes through each `StockLocation` available and determines what can be shipped from there
 * `Stock::Coordinator` ultimately returns an array of packages thats converted into shipments for an
  order by calling `to_shipment` on them
 
 #### 2) The Packer
 * `Stock::Packer` Determines possible packages for a given `StockLocation` and order
-* Uses rules in `Splitters` classes to determine what packages can be shipped from a `StockLocation`
+* Uses rules in `Splitters` classes to determine which items belong in which package and which packages can be shipped from a `StockLocation`
 * Splitters are run in sequence so each Splitter takes the output of the one that came before it
 
 ##### Example
@@ -138,6 +133,7 @@ marked shipped the shipment's total will be captured from the authorization.
 ###### Shipping Category Splitter
 Runs first and splits an order into packages based on the shipping categories so each package will
 only have products of the same shipping category
+
 ###### Weight Splitter
 * Splits an order into packages based on a weight threshold so each package has a mass weight.
 * If a new item is added to the order and it causes a package to go over the weight threshold, a new
