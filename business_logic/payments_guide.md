@@ -1,7 +1,6 @@
 # Payments
 
 ## Components
-
 ### Payment (Model)
 See [here](../models/Payment.md)
 
@@ -22,6 +21,12 @@ See [here](../models/Gateway.md)
 | `failed`     | Payment rejected (e.g. card was declined)                  | `failure`            |
 | `void`       | These payments do NOT count against order total            | `void`               |
 | `completed`  | These payments count against order total                   | `complete`           |
+
+## Order & Payments
+* Orders aren’t always completed in one transaction
+* An order can have more than one payment associated with it if one payment is declined before another is authorized. 
+* Each payment is processed separately, and has its own independent states for Spree to
+track
 
 ## Merchant Account (FYI)
 * A bank account that allows accepting credit card payments
@@ -91,30 +96,42 @@ from "Pending" to "Completed"
 ### Processing Walk-through (Code)
 * When an order is complete, each associated `Payment` object will have `process!` method called
 on it to fulfill the order's balance (unless `payment_required?` returned `false`)
-* If the payment method requires a source and the payment has one then processing starts or
-otherwise the payment needs manual processing
-* How a payment is processed next depends on `PaymentMethod` sub-class' implementation of
-`purchase` and `authorize` methods
-* If `PaymentMethod` is configured to *auto-capture* then:
- * `Payment#purchase!` method is called which then calls `PaymentMethod#purchase`:
-`payment_method.purchase(<amount>, <source>, <gateway options>)`
+* If the payment method requires a source and the payment has one then processing starts.
+Otherwise manual processing is needed
+* If `PaymentMethod` is configured to *auto-capture*:
+ * `Payment#purchase!` method is called which then calls `payment_method.purchase(<amount>, <source>, <gateway options>)`
  * If it's successful, payment is marked `completed`. If not, it's is marked `failed`
-* If `PaymentMethod` is NOT configured to *auto-capture* then:
-  * `Payment#authorize!` method is called which then calls `PaymentMethod#authorize`:
-`payment_method.authorize(<amount>, <source>, <gateway options>)`
+* If `PaymentMethod` is NOT configured to *auto-capture*:
+  * `Payment#authorize!` method is called which then calls `payment_method.authorize(<amount>, <source>, <gateway options>)`
   * If it's successful, payment transitions to `pending` so it's manually captured later by calling
   `capture!` method. If not, payment is marked `failed`
 * Returned objects from `purchase` or `authorize` are `ActiveMerchant::Billing::Response`
 objects to be stored in `spree_log_entries` table as a YAML log entry for the payment
-* Once a payment is saved, it updates the order which may change `payment_state` to any of these:
+* Once a payment is saved, it updates the order which may change `payment_state`
+
+> Increase in `payment_state` of `failed` could be a problem with the gateway. check `log_entries`
+
+### Overall `payment_state` (for the whole order)
+The states of all payments are combined to determine the overall payment state which
+is what the storekeeper sees on the main order admin page
+
   * `balance_due`: Payment is required for this order
   * `failed`: Last payment for this order failed
   * `credit_owed`: This order has been paid for in excess of its total
   * `paid`: Order has been paid for in full
 
-> Increase in `payment_state` of `failed` could be a problem with the gateway. check `log_entries`
+* `balance_due`: when there aren’t enough captured payments to meet the order
+total yet. This might mean that there’s an authorized payment ready to manually
+capture, or it may be that no payment has been made yet and the customer
+needs to be contacted to discuss the order
+* `paid`: when the captured payments cover the order. Payment is done and it’s
+time to ship the order
+* `credit_owed`: when the captured payments add up to more than the order total,
+and the customer is owed a refund. This might happen if items are removed
+from an order after it has been paid
+* `failed`: when the most recent payment for an order is in the failed state
 
-### Log Entries
+### Payment Log Entries
 Payment Log entries can be retrieved with a call to `log_entries` association on any `Payment` object.
 To get `Active::Merchant::Billing::Response` out of `LogEntry` objects, call the `details` method.
 
