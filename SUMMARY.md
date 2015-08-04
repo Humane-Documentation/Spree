@@ -31,7 +31,7 @@
    * [Payments](business_logic/payments.md)
    * [Shipping](business_logic/shipping.md)
    * [Inventory](business_logic/inventory.md)
-   * [Preferences](business_logic/preferences.md)
+   * [Preferences Guide](business_logic/preferences_guide.md)
 * [Extensions](extensions)
    * [spree_flexi_variants](extensions/spree_flexi_variants.md)
    * [spree_related_products](extensions/spree_related_products.md)
