@@ -1,15 +1,14 @@
 # spree-state_machine (gem)
 
-Creating multiple boolean attributes to deciding how to behave based 
-on the values to keep state of an object can become cumbersome and
-difficult to maintain when the complexity of your class starts to increase.
+Creating multiple boolean attributes so behaviors are based 
+on their values to keep state of an object becomes cumbersome and
+difficult to maintain when the complexity of your class starts to increase. Was the previous sentence hard to understand? Exactly.
 
-*state_machine* adds support for creating state machines for attributes on any
+*state_machine* gem adds support for creating state machines for attributes on any
 Ruby class. It introduces the various parts of a real state machine, including
 states, events, transitions, and callbacks
 
 ## Features
-
 * Initial states
 * Multiple states on a single class
 * Namespaced states
@@ -30,11 +29,9 @@ states, events, transitions, and callbacks
 * Internationalization
 
 ## API
-
 http://rdoc.info/github/pluginaweek/state_machine/master/frames
 
 ## Example
-
 Class definition:
 
 ```ruby
@@ -155,11 +152,9 @@ class Vehicle
   end
 end
 ```
-
 > `super()` must be called on the `initialize` method. See `StateMachine::MacroMethods` for more about this.
 
-Now you can interact with the state machine you defined:
-
+Now you can interact with the state machine defined:
 ```ruby
 vehicle = Vehicle.new           # => #<Vehicle:0xb7cf4eac @state="parked", @seatbelt_on=false>
 vehicle.state                   # => "parked"
@@ -250,14 +245,12 @@ vehicle.state_name              # => :parked
 
 ## Integration
 ### ActiveModel
-
 * Adds support for validation errors, dirty attribute tracking, and observers
 * Useful for standard ActiveModel and ORMs implementing ActiveModel API
 * For more information about the various behaviors added for ActiveModel state
 machines, see `StateMachine::Integrations::ActiveModel`
 
 ##### *Example*
-
 ```ruby
 class Vehicle
   include ActiveModel::Dirty
@@ -318,7 +311,6 @@ end
 machines, see `StateMachine::Integrations::ActiveRecord`
 
 ##### *Example*
-
 ```ruby
 class Vehicle < ActiveRecord::Base
   state_machine :initial => :parked do
@@ -360,10 +352,40 @@ class VehicleObserver < ActiveRecord::Observer
   end
 end
 ```
+#### Explicit vs. Implicit Event Transitions
+Every event defined for a state machine generates an instance method on the
+class that allows the event to be explicitly triggered.  Most examples here use this technique.  However, with ActiveRecord, you can also *implicitly* fire events by
+setting the state event attribute first and then invoking the action associated with the state machine
+
+##### *Example*
+```ruby
+class Vehicle < ActiveRecord::Base
+  state_machine :initial => :parked do
+    event :ignite do
+      transition :parked => :idling
+    end
+  end
+end
+```
+###### Explicit Transition
+```ruby
+vehicle = Vehicle.create    # => #<Vehicle id=1 state="parked">
+vehicle.ignite              # => true
+vehicle.state               # => "idling"
+```
+
+###### Implicit Transition
+```ruby
+vehicle = Vehicle.create        # => #<Vehicle id=1 state="parked">
+vehicle.state_event = "ignite"  # => "ignite"
+vehicle.save                    # => true
+vehicle.state                   # => "idling"
+vehicle.state_event             # => nil
+```
+`ignite` event here was automatically triggered when the `save` action was called.  This is particularly useful if you want to allow users to drive the state transitions from a web API.
 
 ### Other Integrations
 See original documentation
-
 
 ## Usage - Rails
 Integrating state_machine into your Ruby on Rails application is straightforward
@@ -417,24 +439,18 @@ autoload_plugins:
 ```
 
 ## Testing
-
 To run the core test suite (does **not** test any of the integrations):
-
 ```bash
 bundle install
 bundle exec rake test
 ```
-
 To run integration tests:
-
 ```bash
 bundle install
 rake appraisal:install
 rake appraisal:test
 ```
-
 You can also test a specific version:
-
 ```bash
 rake appraisal:active_model-3.0.0 test
 rake appraisal:active_record-2.0.0 test
@@ -465,55 +481,7 @@ class Vehicle < ActiveRecord::Base
 end
 ```
 
-## Additional Topics
-
-### Explicit vs. Implicit Event Transitions
-Every event defined for a state machine generates an instance method on the
-class that allows the event to be explicitly triggered.  Most of the examples in
-the state_machine documentation use this technique.  However, with some types of
-integrations, like ActiveRecord, you can also *implicitly* fire events by
-setting a special attribute on the instance.
-
-Suppose you're using the ActiveRecord integration and the following model is
-defined:
-
-```ruby
-class Vehicle < ActiveRecord::Base
-  state_machine :initial => :parked do
-    event :ignite do
-      transition :parked => :idling
-    end
-  end
-end
-```
-
-To trigger the `ignite` event, you would typically call the `Vehicle#ignite`
-method like so:
-
-```ruby
-vehicle = Vehicle.create    # => #<Vehicle id=1 state="parked">
-vehicle.ignite              # => true
-vehicle.state               # => "idling"
-```
-
-This is referred to as an *explicit* event transition.  The same behavior can
-also be achieved *implicitly* by setting the state event attribute and invoking
-the action associated with the state machine.  For example:
-
-```ruby
-vehicle = Vehicle.create        # => #<Vehicle id=1 state="parked">
-vehicle.state_event = "ignite"  # => "ignite"
-vehicle.save                    # => true
-vehicle.state                   # => "idling"
-vehicle.state_event             # => nil
-```
-
-As you can see, the `ignite` event was automatically triggered when the `save`
-action was called.  This is particularly useful if you want to allow users to
-drive the state transitions from a web API.
-
-See each integration's API documentation for more information on the implicit
-approach.
+## Advanced Topics
 
 ### Symbols vs. Strings
 In all of the examples used throughout the documentation, you'll notice that
@@ -521,7 +489,6 @@ states and events are almost always referenced as symbols.  This isn't a
 requirement, but rather a suggested best practice.
 
 You can very well define your state machine with Strings like so:
-
 ```ruby
 class Vehicle
   state_machine :initial => 'parked' do
@@ -533,13 +500,11 @@ class Vehicle
   end
 end
 ```
-
 You could even use numbers as your state / event names.  The **important** thing
 to keep in mind is that the type being used for referencing states / events in
 your machine definition must be **consistent**.  If you're using Symbols, then
 all states / events must use Symbols.  Otherwise you'll encounter the following
 error:
-
 ```ruby
 class Vehicle
   state_machine do
@@ -551,12 +516,10 @@ end
 
 # => ArgumentError: "idling" state defined as String, :parked defined as Symbol; all states must be consistent
 ```
-
 There **is** an exception to this rule.  The consistency is only required within
 the definition itself.  However, when the machine's helper methods are called
 with input from external sources, such as a web form, state_machine will map
 that input to a String / Symbol.  For example:
-
 ```ruby
 class Vehicle
   state_machine :initial => :parked do
@@ -570,12 +533,10 @@ v = Vehicle.new     # => #<Vehicle:0xb71da5f8 @state="parked">
 v.state?('parked')  # => true
 v.state?(:parked)   # => true
 ```
-
 **Note** that none of this actually has to do with the type of the value that
 gets stored.  By default, all state values are assumed to be string -- regardless
 of whether the state names are symbols or strings.  If you want to store states
 as symbols instead you'll have to be explicit about it:
-
 ```ruby
 class Vehicle
   state_machine :initial => :parked do
@@ -593,7 +554,6 @@ v = Vehicle.new     # => #<Vehicle:0xb71da5f8 @state=:parked>
 v.state?('parked')  # => true
 v.state?(:parked)   # => true
 ```
-
 ### Syntax flexibility
 state_machine provide flexibility around how transitions are defined.
 
@@ -619,19 +579,16 @@ class Vehicle
   end
 end
 ```
-
 #### Transition context
 Some flexibility is provided around the context in which transitions can be
 defined.  In almost all examples throughout the documentation, transitions are
 defined within the context of an event.  If you prefer to have state machines
 defined in the context of a **state** either out of preference or in order to
 easily migrate from a different library, you can do so as shown below:
-
 ```ruby
 class Vehicle
   state_machine :initial => :parked do
     ...
-
     state :parked do
       transition :to => :idling, :on => [:ignite, :shift_up], :if => :seatbelt_on?
 
@@ -654,7 +611,6 @@ class Vehicle
   end
 end
 ```
-
 In the above example, there's no need to specify the `from` state for each
 transition since it's inferred from the context.
 
@@ -662,12 +618,10 @@ You can also define transitions completely outside the context of a particular
 state / event.  This may be useful in cases where you're building a state
 machine from a data store instead of part of the class definition.  See the
 example below:
-
 ```ruby
 class Vehicle
   state_machine :initial => :parked do
     ...
-
     transition :parked => :idling, :on => [:ignite, :shift_up]
     transition :first_gear => :second_gear, :second_gear => :third_gear, :on => :shift_up
     transition [:idling, :first_gear] => :parked, :on => :park
@@ -676,7 +630,6 @@ class Vehicle
   end
 end
 ```
-
 Notice that in these alternative syntaxes:
 
 * You can continue to configure `:if` and `:unless` conditions
@@ -702,7 +655,6 @@ class Vehicle
   end
 end
 ```
-
 However, there may be cases where the definition of a state machine is **dynamic**.
 This means that you don't know the possible states or events for a machine until
 runtime.  For example, you may allow users in your application to manage the
@@ -710,7 +662,6 @@ state machine of a project or task in your system.  This means that the list of
 transitions (and their associated states / events) could be stored externally,
 such as in a database.  In a case like this, you can define dynamically-generated
 state machines like so:
-
 ```ruby
 class Vehicle
   attr_accessor :state
@@ -773,7 +724,6 @@ vehicle.state                           # => "idling"
 vehicle.machine.state_transitions       # => [#<StateMachine::Transition ...>]
 vehicle.machine.definition.states.keys  # => :first_gear, :second_gear, :parked, :idling
 ```
-
 As you can see, state_machine provides enough flexibility for you to be able
 to create new machine definitions on the fly based on an external source of
 transitions.
@@ -800,10 +750,8 @@ class Vehicle
   end
 end
 ```
-
 If you're using a gem loader like Bundler, you can explicitly indicate which
 file to load:
-
 ```ruby
 # In Gemfile
 ...
