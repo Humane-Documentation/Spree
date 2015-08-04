@@ -25,7 +25,7 @@
    * [Geography](business_logic/geography.md)
    * [Products](business_logic/products.md)
    * [Calculators](business_logic/calculators.md)
-   * [Orders](business_logic/orders.md)
+   * [Order & Checkout Guide](business_logic/order_checkout_guide.md)
    * [Promotions](business_logic/promotions.md)
    * [Taxation](business_logic/taxation.md)
    * [Payments](business_logic/payments.md)
