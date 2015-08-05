@@ -15,12 +15,21 @@ See [here](../models/Gateway.md)
 
 | State        | Description                                                | Callable with        |
 |--------------|------------------------------------------------------------|----------------------|
-| `checkout`   | still in checkout                                          |                      |
+| `checkout`   | still in checkout (before purchase or authorization)       |                      |
 | `processing` | Temporary state to prevent double submission               | `started_processing` |
 | `pending`    | Processed but incomplete (eg. authorized but not captured) | `pend`               |
 | `failed`     | Payment rejected (e.g. card was declined)                  | `failure`            |
 | `void`       | These payments do NOT count against order total            | `void`               |
 | `completed`  | These payments count against order total                   | `complete`           |
+
+| Event                | Description                                                                                                            |
+|----------------------|------------------------------------------------------------------------------------------------------------------------|
+| `started_processing` | Set after creating a profile and authorizing full amount to prevent reauthorizing once Order transitions to `complete` |
+| `failure`            | When processing during checkout fails                                                                                  |
+| `pend`               | Authorizing the payment                                                                                                |
+| `complete`           | Completing a purchase or capture transaction                                                                           |
+| `void`               |                                                                                                                        |
+| `invalidate`         | Card brand isn't supported                                                                                             |
 
 ## Order & Payments
 * Orders aren’t always completed in one transaction
