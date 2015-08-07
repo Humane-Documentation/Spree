@@ -1,10 +1,17 @@
 ## Taxation
-
 * Taxes are represented using `tax_categories` and `tax_rates`
 * Spree default is to treat everything as exempt from tax
 * Taxes are calculated based on best matching zone for the order
 * When an order is placed, any product with a tax zone matching the order's zone will be taxed
 * A zone might have multiple `tax_rates`
+
+## Components
+### Tax Category (Model)
+See [here](../models/TaxCategory.md)
+
+### Tax Rate (Model)
+See [here](../models/TaxRate.md)
+
 
 Tax rates can *potentially* be applicable to an order but this can't be determined until we 
 attempt to apply these rates to the order's items. For instance, if a rate 
@@ -43,13 +50,6 @@ If the order's address changes to one in France, then the tax will be recalculat
 * Under no circumstances should negative adjustments be applied for the Spanish tax rates
 * Those rates should never come into play at all and only the French rates should apply
 
-## Components
-### Tax Category (Model)
-See [here](../models/TaxCategory.md)
-
-### Tax Rate (Model)
-See [here](../models/TaxRate.md)
-
 ## `DefaultTax` Calculator
 * Suitable for both sales tax and price-inclusive tax
 * Uses the item total (exclusive of shipping) when computing sales tax
@@ -58,11 +58,13 @@ See [here](../models/TaxRate.md)
 Zones: "Pennsylvania", "New York", "European Union"
 Tax Categories: "clothing", "electronics"
 Tax Rates: 6%, 10%, 5%
-hypothetical 1:You need to charge 5% tax for all items that ship to New York and 6% on clothing that
+hypothetical 1
+You need to charge 5% tax for all items that ship to New York and 6% on clothing that
 ship to Pennsylvania. This will mean you need to construct two different zones: one zone containing
 state of New York and another for state of Pennsylvania
 
-hypothetical 2: You would like to charge 10% tax on all electronics and 5% tax on everything else.
+hypothetical 2
+You would like to charge 10% tax on all electronics and 5% tax on everything else.
 This tax should apply to all countries in the European Union (EU). In this case you would construct
 a single zone consisting of all countries in the EU. The fact that you want to charge two different
 rates depending on the type of good does not mean you need two zones
