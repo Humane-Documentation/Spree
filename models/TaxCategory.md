@@ -16,5 +16,3 @@
 
 ## Instance Methods
 ### (Object) **set_default_category**
-  
-
