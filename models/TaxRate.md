@@ -1,14 +1,9 @@
 [Index](../_index.md) » TaxRate
 
 # (Class) [Spree::TaxRate](http://m.gymplayer.com/tax_rate.rb)
-* Percentage amount charged based on sales price
-* Contains other information:
-    * Tax category a product must belong to to be taxable
-    * Zone in which order address must be located
-    * Whether product prices are inclusive of this tax
 * A zone might have multiple `tax_rates`
 * Taxes will be calculated based on best matching zone for the order
-* When an order is placed, any product that with a tax zone matching the order's zone will be taxed
+* When an order is placed, any product with a tax zone matching the order's zone will be taxed
 
 Tax rates can *potentially* be applicable to an order but this can't be determined until we 
 attempt to apply these rates to the order's items. For instance, if a rate 
@@ -48,10 +43,10 @@ If the order's address changes to one in France, then the tax will be recalculat
 * Those rates should never come into play at all and only the French rates should apply
 
 #### Attributes
-* `amount`
-* `zone_id`
-* `tax_category_id`
-* `included_in_price`
+* `amount`: Percentage amount charged based on sales price
+* `zone_id`: Zone in which order address must be located
+* `tax_category_id`: Tax category a product must belong to to be taxable
+* `included_in_price`: Whether product prices are inclusive of this tax
 * `name`
 * `show_rate_in_label`
 * `deleted_at`
