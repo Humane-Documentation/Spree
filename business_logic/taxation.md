@@ -9,14 +9,19 @@
 ### Tax Category (Model)
 See [here](../models/TaxCategory.md)
 
+* Grouping products which are taxed the same way
+* A product must belong to a tax category to be taxable
+* A `tax_category` can have many `tax_rates`
+* One Tax Category can be set as default so if a product doesn't have a related tax
+ category, the default tax category would apply
+
 ### Tax Rate (Model)
 See [here](../models/TaxRate.md)
 
 
-Tax rates can *potentially* be applicable to an order but this can't be determined until we 
+Tax rates applicability to an order can't be determined until we 
 attempt to apply these rates to the order's items. For instance, if a rate 
-passes the criteria outlined in this method, but then has a tax category that doesn't match against any 
-of the line items inside of the order, then that tax rate will not be applicable to anything
+passes the criteria outlined in this method, but then has a tax category that doesn't match against any of the line items inside of the order, then that tax rate will not be applicable to anything
 
 ##### *Example*
 
