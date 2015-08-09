@@ -2,30 +2,39 @@
 
 ## Components
 ### [Payment](../models/Payment.md) (Model)
-Tracks payments against `Order`s to decouple logic of processing payments from orders
+* Tracks payments against `Order`s to decouple logic of processing payments from orders
+* An order can have more than one payment associated with it (e.g. one payment is declined before another is authorized)
+* Each payment is processed separately within its own payment states
 
-### [Gateway](../models/Gateway.md) (Model)
-* Service that authorizes credit card payments, processes them securely, and deposits funds 
-to retailer's bank account
+### [Payment Method](../models/PaymentMethod.md) (Model)
+* Options for making a payment
+* Currently includes two major payment methods `Gateway` and `Check`
+* Third-party extensions provide support for other options
+
+#### Structure
+Each payment method:
+* Subclasses `PaymentMethod` under `models/spree/payment_method/` folder
+* Single table inherits `PaymentMethod` but is tracked with `type` attribute of `PaymentMethod`
+
+#### [Check](../models/Check.md) (`PaymentMethod`)
+Represents a base for offline payment methods
+
+#### [Gateway](../models/Gateway.md) (`PaymentMethod`)
+* Represents a base for gateways which are services that authorize credit card payments, process them securely, and deposits funds to retailer's bank account
 * Supported gateways are added through [spree_gateway](https://github.com/spree/spree_gateway) which is a wrapper for the awesome `active_merchant` gem
 
-#### Typical Fees (TMI)
+##### Merchant Account (FYI)
+* A bank account that allows accepting credit card payments
+* An Internet merchant account allows accepting payments online without having the customer's
+credit card physically in front of you
+
+##### Typical Gateway Fees (FYI)
 * **Setup Fee** - A one-time charge to set up a payment gateway account
 * **Recurring Fixed Monthly Fees** - fixed monthly fee gateway provider charges for access to 
 their services and reports. Some gateways break this charge down further into a monthly
 Gateway Fee and a Statement Fee
 * **Transaction Fees** - A charge for each purchase made on your store. Pricing structure for 
 these differ but a popular structure is to charge a percentage of the purchase price plus a flat fee
-
-### [Payment Method](../models/PaymentMethod.md) (Model)
-* Options for making a payment
-* Mostly online options (gateways) but include default support for a Check payment method which can be used for offline payments
-* Third-party extensions provide support for other options
-
-#### Structure
-Each option/method:
-* Subclasses `PaymentMethod` under `models/spree/payment_method/` folder
-* Single table inherits `PaymentMethod` but is tracked with `type` attribute of `PaymentMethod`
 
 ## Payment States
 ![](payment_states.png)
@@ -47,17 +56,6 @@ Each option/method:
 | `complete`           | Completing a purchase or capture transaction                                                                           |
 | `void`               |                                                                                                                        |
 | `invalidate`         | Card brand isn't supported                                                                                             |
-
-## Order & Payments
-* Orders aren’t always completed in one transaction
-* An order can have more than one payment associated with it if one payment is declined before another is authorized. 
-* Each payment is processed separately, and has its own independent states for Spree to
-track
-
-## Merchant Account (FYI)
-* A bank account that allows accepting credit card payments
-* An Internet merchant account allows accepting payments online without having the customer's
-credit card physically in front of you
 
 ## Credit Card Data
 * In production mode, credit card data is transmitted only once and via SSL
