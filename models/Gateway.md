@@ -3,7 +3,7 @@
 # (Class) [Spree::Gateway](http://m.gymplayer.com/gateway.rb)
 
 ### Attributes
-* `type`
+* `type`: Tracks added payment methods
 * `name`
 * `description`
 * `active` 
