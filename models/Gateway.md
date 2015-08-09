@@ -1,8 +1,6 @@
 [Index](../_index.md) » Gateway
 
 # (Class) [Spree::Gateway](http://m.gymplayer.com/gateway.rb)
-Service that authorizes credit card payments, processes them securely, and deposits the funds 
-into retailer's bank account
 
 ### Attributes
 * `type`
