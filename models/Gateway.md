@@ -34,25 +34,6 @@
 * `country`: ISO name, e.g. "US", "AU"
 * `phone`
 
-## Supported Gateways
-* Payment processing attempts to comply with `active_merchant` gem API where possible
-* See [spree_gateway](https://github.com/spree/spree_gateway) extension
-
-## Adding a gateway (Customization)
-For a custom gateway to show up on the backend you need to add it to the config list of payment
-methods by adding the following in spree.rb for example:
-```
-Rails.application.config.spree.payment_methods << YourCustomGateway
-```
-
-## Typical Fees (TMI)
-* *Setup Fee* - A one-time charge to set up a payment gateway account
-* *Recurring Fixed Monthly Fees* - fixed monthly fee gateway provider charges for access to 
-their services and reports. Some gateways break this charge down further into a monthly
-Gateway Fee and a Statement Fee
-* *Transaction Fees* - A charge for each purchase made on your store. Pricing structure for 
-these differ but a popular structure is to charge a percentage of the purchase price plus a flat fee
-
 ## Direct Subclasses
 * [Bogus](Gateway/Bogus.md), [Test](Gateway/Test.md)
 
