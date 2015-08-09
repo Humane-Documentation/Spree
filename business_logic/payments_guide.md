@@ -8,18 +8,15 @@
 
 ### [Payment Method](../models/PaymentMethod.md) (Model)
 * Options for making a payment
-* Currently includes two major payment methods `Gateway` and `Check`
-* Third-party extensions provide support for other options
-
-#### Structure
-Each payment method:
-* Subclasses `PaymentMethod` under `models/spree/payment_method/` folder
-* Single table inherits `PaymentMethod` but is tracked with `type` attribute of `PaymentMethod`
+* Currently includes two types: `Gateway` and `Check`. Both subclass `PaymentMethod` and single table inherits `PaymentMethod` but is tracked with `type` attribute of `PaymentMethod`
+* Extensions provide support for other options within the two main types or add other types
 
 #### [Check](../models/Check.md) (`PaymentMethod`)
-Represents a base for offline payment methods
+* Subclasses `PaymentMethod` under `/models/spree/payment_method/` folder
+* Represents a base for offline payment methods
 
 #### [Gateway](../models/Gateway.md) (`PaymentMethod`)
+* Subclasses `PaymentMethod` but under `/models/spree/` folder!
 * Represents a base for gateways which are services that authorize credit card payments, process them securely, and deposits funds to retailer's bank account
 * Supported gateways are added through [spree_gateway](https://github.com/spree/spree_gateway) which is a wrapper for the awesome `active_merchant` gem
 
@@ -153,8 +150,10 @@ Done from the Admin Interface
 
 ## *Customization Tips*
 
-### Adding a Payment Method (e.g. gateway)
-* Follow `PaymentMethod` [stracture](#Structure) mentioned above
+### Adding a Payment Method
+* If
+    * **Non-Gateway**: Subclass `PaymentMethod` under `/models/spree/payment_method/` folder
+    * **Gateway**: Subclass `Gateway` under `/models/spree/gateway/` folder
 * Add it to the config list of payment methods by adding the following to spree.rb:
 ```
 Rails.application.config.spree.payment_methods << CustomPaymentMethodName
