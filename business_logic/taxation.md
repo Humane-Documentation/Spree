@@ -1,9 +1,9 @@
 ## Taxation
-* Taxes are represented using `tax_categories` and `tax_rates`
-* Spree default is to treat everything as exempt from tax
-* Taxes are calculated based on best matching zone for the order
+* Taxes are calculated based on best matching [zone](/geography.md#zone) for the order
 * When an order is placed, any product with a tax zone matching the order's zone will be taxed
 * A zone might have multiple `tax_rates`
+
+> Spree's default is to treat everything as exempt from tax
 
 ## Components
 ### [Tax Category](../models/TaxCategory.md) (Model)
