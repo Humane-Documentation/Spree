@@ -1,10 +1,6 @@
 [Index](../_index.md) » PaymentMethod
 
 # (Class) [Spree::PaymentMethod](http://m.gymplayer.com/payment_method.rb)
-* Represents options for making a payment online or offline
-* Mostly gateway options but also include default support for a Check payment which can 
-be used for offline payments
-* Third-party extensions provide support for other options
 
 ## Attributes
 * `type`: subclass of `PaymentMethod` represented. Uses rails single table inheritance
