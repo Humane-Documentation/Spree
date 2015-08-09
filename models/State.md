@@ -1,8 +1,6 @@
 [Index](../_index.md) » State
 
 # (Class) [Spree::State](http://m.gymplayer.com/state.rb)
-Used to scope address slightly more than country for when a country have states with
-differing taxes, shipping methods, etc.
 
 #### Attributes
 * `name`
