@@ -1,8 +1,13 @@
 # Products Guide
 
 ## Components
-### Taxonomy (Model)
-See [here](../models/Taxonomy.md)
+### [Taxonomy](../models/Taxonomy.md) (Model)
+![z](taxonomy_tree.jpg)
+
+* The category tree - a hierarchical list of individual Taxons
+* Each `Taxonomy` relates to one `Taxon` that is its root node
+* Admins can define many Taxonomies and link a product to multiple Taxons from each Taxonomy
+* Taxonomies are ordered by their `position` attribute
 
 ### Taxon (Model)
 See [here](../models/Taxon.md)
