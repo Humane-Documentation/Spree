@@ -1,8 +1,8 @@
 # Payments
 
 ## Components
-### Payment (Model)
-See [here](../models/Payment.md)
+### [Payment](../models/Payment.md) (Model)
+`Payment` tracks payments against `Order`s to decouple logic of processing payments from orders
 
 ### Payment Method (Model)
 See [here](../models/PaymentMethod.md)
