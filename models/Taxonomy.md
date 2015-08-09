@@ -7,4 +7,4 @@
 
 ### Attributes
 * `name`
-* `position`
+* `position`: Used to sort taxonomies
