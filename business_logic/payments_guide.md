@@ -154,7 +154,7 @@ Done from the Admin Interface
 * If
     * **Non-Gateway**: Subclass `PaymentMethod` under `/models/spree/payment_method/` folder
     * **Gateway**: Subclass `Gateway` under `/models/spree/gateway/` folder
-* Add it to the config list of payment methods by adding the following to spree.rb:
+* Add it to the config list of payment methods in spree.rb:
 ```
 Rails.application.config.spree.payment_methods << CustomPaymentMethodName
 ```
