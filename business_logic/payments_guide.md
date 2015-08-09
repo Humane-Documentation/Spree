@@ -36,6 +36,16 @@ Gateway Fee and a Statement Fee
 * **Transaction Fees** - A charge for each purchase made on your store. Pricing structure for 
 these differ but a popular structure is to charge a percentage of the purchase price plus a flat fee
 
+### [Credit Card](../models/CreditCard.md) (Model)
+z
+
+#### Credit Card Data
+* In production mode, credit card data is transmitted only once and via SSL
+* Data is immediately submitted to your payment gateway and then discarded before saving the model
+* Only name, type, expiration and last four digits are saved and only for verification
+* Other data is never stored in the database, not even temporarily. It exists in memory on the
+server for a fraction of a second before it's discarded
+
 ## Payment States
 ![](payment_states.png)
 
@@ -57,14 +67,7 @@ these differ but a popular structure is to charge a percentage of the purchase p
 | `void`               |                                                                                                                        |
 | `invalidate`         | Card brand isn't supported                                                                                             |
 
-## Credit Card Data
-* In production mode, credit card data is transmitted only once and via SSL
-* Data is immediately submitted to your payment gateway and then discarded before saving the model
-* Only name, type, expiration and last four digits are saved and only for verification
-* Other data is never stored in the database, not even temporarily. It exists in memory on the
-server for a fraction of a second before it's discarded
-
-## Authorize vs Capture
+### Authorize vs Capture
 * *Authorize*: Confirming availability of funds for a transaction with purchaser's card company
 * Spree By default handles authorizing the payment for a transaction
 * *Capturing*: Telling the card company you want to get paid for a transaction amount
@@ -73,7 +76,6 @@ server for a fraction of a second before it's discarded
 retailers to delay charging the customer until the purchase is fulfilled (shipped)
 * Not all gateways allow the two step process. Confirm with your payment gateway and doctor too
 
-## Processing
 ### Payment Profiles vs No Payment Profiles
 #### Payment Profiles (Default)
 * Service provided by some payment gateways
@@ -106,7 +108,8 @@ before it's time to authorize it. In detail:
 
 This is secure since CC information is transmitted to the gateway and then discarded
 
-### Processing Walk-through (UI)
+### Processing Walk-through
+#### UI
 * Receiving an order, an admin needs to process its payment (this guide focuses on processing
 credit card payments). An order is ready for processing if
   * Order State is "Complete", meaning all information customer needs to provide is present
@@ -117,7 +120,7 @@ processing
 * If payment is processed successfully the page will show you that payment state has progressed
 from "Pending" to "Completed"
 
-### Processing Walk-through (Code)
+#### Code
 * When an order is complete, each associated `Payment` object will have `process!` method called
 on it to fulfill the order's balance (unless `payment_required?` returned `false`)
 * If the payment method requires a source and the payment has one then processing starts.
@@ -144,7 +147,7 @@ is what the storekeeper sees on the main order admin page
 * `credit_owed`: Captured payments add up to more than the order total so the customer is owed a refund. This might happen if items are removed from an order after it has been paid
 * `failed`: Last payment for this order failed
 
-### Payment Log Entries
+## Payment Log Entries
 Payment Log entries can be retrieved with a call to `log_entries` association on any `Payment` object.
 To get `Active::Merchant::Billing::Response` out of `LogEntry` objects, call the `details` method.
 
