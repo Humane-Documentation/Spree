@@ -24,7 +24,7 @@ and limits available Shipping Methods
 > Add new states and countries to zones so the system can accurately calculate tax and shipping
 options
 
-## Geography Preferences
+## Geography & Preferences
 *  `Spree::Config` preferences allows control of appearing address fields such as 
 * State field can be disabled by using the `Spree::Config[:address_requires_state]` preference
 * You can allow an "alternate phone" field by using `Spree::Config[:alternative_shipping_phone]`
