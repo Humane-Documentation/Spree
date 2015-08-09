@@ -37,9 +37,6 @@ Gateway Fee and a Statement Fee
 these differ but a popular structure is to charge a percentage of the purchase price plus a flat fee
 
 ### [Credit Card](../models/CreditCard.md) (Model)
-z
-
-#### Credit Card Data
 * In production mode, credit card data is transmitted only once and via SSL
 * Data is immediately submitted to your payment gateway and then discarded before saving the model
 * Only name, type, expiration and last four digits are saved and only for verification
