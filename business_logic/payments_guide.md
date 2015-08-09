@@ -5,8 +5,17 @@
 Tracks payments against `Order`s to decouple logic of processing payments from orders
 
 ### [Gateway](../models/Gateway.md) (Model)
-Service that authorizes credit card payments, processes them securely, and deposits funds 
+* Service that authorizes credit card payments, processes them securely, and deposits funds 
 to retailer's bank account
+* Supported gateways are added through [spree_gateway](https://github.com/spree/spree_gateway) which is a wrapper for the awesome `active_merchant` gem
+
+#### Typical Fees (TMI)
+* **Setup Fee** - A one-time charge to set up a payment gateway account
+* **Recurring Fixed Monthly Fees** - fixed monthly fee gateway provider charges for access to 
+their services and reports. Some gateways break this charge down further into a monthly
+Gateway Fee and a Statement Fee
+* **Transaction Fees** - A charge for each purchase made on your store. Pricing structure for 
+these differ but a popular structure is to charge a percentage of the purchase price plus a flat fee
 
 ### [Payment Method](../models/PaymentMethod.md) (Model)
 * Options for making a payment
@@ -145,6 +154,14 @@ To get `Active::Merchant::Billing::Response` out of `LogEntry` objects, call the
 Done from the Admin Interface
 
 ## *Customization Tips*
+
+### Adding a Payment Method (e.g. gateway)
+* Follow `PaymentMethod` [stracture](#Structure)
+* Add it to the config list of payment methods by adding the following to spree.rb:
+```
+Rails.application.config.spree.payment_methods << CustomPaymentMethodName
+```
+
 ### Payment Profiles
 * All `Gateway` classes have a `payment_profiles_supported?` method which indicates whether or
 not payment profiles are supported
