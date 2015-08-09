@@ -2,14 +2,13 @@
 
 Spree store make decisions about [shipping](shipping.md) and [taxation](taxation.md) policies using:
 
-### Countries
-See [Country model](../models/Country.md)
+### [Country](../models/Country.md) (model)
+* Used as a container for states
+* Can be zone members but can also on its own determine tax rates and shipping methods available
 
-### States
-See [State model](../models/State.md)
+### [State](../models/State.md) (model)
 
-### Zones
-See [Zone model](../models/Zone.md)
+### [Zone](../models/Zone.md) (model)
 
 > Add new states and countries to zones so the system can accurately calculate tax and shipping
 options
