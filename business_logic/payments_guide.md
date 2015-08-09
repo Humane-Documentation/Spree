@@ -1,8 +1,12 @@
-# Payments
+# Payments Guide
 
 ## Components
 ### [Payment](../models/Payment.md) (Model)
 Tracks payments against `Order`s to decouple logic of processing payments from orders
+
+### [Gateway](../models/Gateway.md) (Model)
+Service that authorizes credit card payments, processes them securely, and deposits funds 
+to retailer's bank account
 
 ### [Payment Method](../models/PaymentMethod.md) (Model)
 * Options for making a payment
@@ -14,9 +18,6 @@ Each option/method:
 * Subclasses `PaymentMethod` under `models/spree/payment_method/` folder
 * Single table inherits `PaymentMethod` but is tracked with `type` attribute of `PaymentMethod`
 
-### Gateway (Model)
-See [here](../models/Gateway.md)
-z
 ## Payment States
 ![](payment_states.png)
 
