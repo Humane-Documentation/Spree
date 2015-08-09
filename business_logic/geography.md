@@ -7,6 +7,8 @@ Spree store make decisions about [shipping](shipping.md) and [taxation](taxation
 * Can be zone members but can also on its own determine tax rates and shipping methods available
 
 ### [State](../models/State.md) (model)
+Used to scope address slightly more than country for when a country have states with
+differing taxes, shipping methods, etc.
 
 ### [Zone](../models/Zone.md) (model)
 
