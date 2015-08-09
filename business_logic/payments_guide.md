@@ -156,7 +156,7 @@ Done from the Admin Interface
 ## *Customization Tips*
 
 ### Adding a Payment Method (e.g. gateway)
-* Follow `PaymentMethod` [stracture](#Structure)
+* Follow `PaymentMethod` [stracture](#Structure) mentioned above
 * Add it to the config list of payment methods by adding the following to spree.rb:
 ```
 Rails.application.config.spree.payment_methods << CustomPaymentMethodName
