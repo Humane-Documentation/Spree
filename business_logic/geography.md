@@ -1,6 +1,8 @@
 # Geography
 
-Spree store make decisions about [shipping](shipping.md) and [taxation](taxation.md) policies using:
+Spree store make decisions about [shipping](shipping.md) and [taxation](taxation.md) policies using geography of buyers
+
+## Components
 
 ### [Country](../models/Country.md) (model)
 * Used as a container for states
@@ -11,10 +13,18 @@ Used to scope address slightly more than country for when a country have states 
 differing taxes, shipping methods, etc.
 
 ### [Zone](../models/Zone.md) (model)
+* Collection of either countries or states
+* Order's Shipping Address (country or a state) defines its zone
+and limits available Shipping Methods
+* Order's zone determines its:
+  * *shipping zone*: Can limit available shipping methods
+  * *tax zone*: Determines applicable tax rules
+* Each shipping method is assigned to only one zone
 
 > Add new states and countries to zones so the system can accurately calculate tax and shipping
 options
 
+## Geography Preferences
 *  `Spree::Config` preferences allows control of appearing address fields such as 
 * State field can be disabled by using the `Spree::Config[:address_requires_state]` preference
 * You can allow an "alternate phone" field by using `Spree::Config[:alternative_shipping_phone]`
