@@ -4,12 +4,19 @@
 ### [Payment](../models/Payment.md) (Model)
 Tracks payments against `Order`s to decouple logic of processing payments from orders
 
-### Payment Method (Model)
-See [here](../models/PaymentMethod.md)
+### [Payment Method](../models/PaymentMethod.md) (Model)
+* Options for making a payment
+* Mostly online options (gateways) but include default support for a Check payment method which can be used for offline payments
+* Third-party extensions provide support for other options
+
+#### Structure
+Each option/method:
+* Subclasses `PaymentMethod` under `models/spree/payment_method/` folder
+* Single table inherits `PaymentMethod` but is tracked with `type` attribute of `PaymentMethod`
 
 ### Gateway (Model)
 See [here](../models/Gateway.md)
-
+z
 ## Payment States
 ![](payment_states.png)
 
