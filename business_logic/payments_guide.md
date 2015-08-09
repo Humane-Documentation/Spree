@@ -102,7 +102,7 @@ before it's time to authorize it. In detail:
 
 This is secure since CC information is transmitted to the gateway and then discarded
 
-### Processing Walk-through
+### Processing (Walk-through)
 #### UI
 * Receiving an order, an admin needs to process its payment (this guide focuses on processing
 credit card payments). An order is ready for processing if
