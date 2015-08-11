@@ -5,7 +5,7 @@
 ### Attributes
 * `payment_id`
 * `amount`
-* `transaction_id`
+* `transaction_id`: corresponds to `response_code` under `Payment`
 * `refund_reason_id`
 * `reimbursement_id`
 
