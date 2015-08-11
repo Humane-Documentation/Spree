@@ -6,7 +6,7 @@
 ### Attributes
 * `amount`
 * `order_id`
-* `source_type`: Payment type used. e.g. `Spree::CreditCard` in the case of a Gateway payment type or nil in case the payment method doesn't require a source e.g. check
+* `source_type`: Payment type used. e.g. `Spree::CreditCard` in case of a Gateway payment or nil in case the payment method doesn't require a source e.g. check
 * `source_id`: Identifier within the `source_type` used. e.g. credit_card_id, gift_card_id
 * `payment_method_id`
 * `state` see [Payments Guide](../business_logic/payments_guide.md)
