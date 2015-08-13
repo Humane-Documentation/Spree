@@ -51,7 +51,7 @@ rates depending on the type of good does not mean you need two zones
 * To calculate tax based on billing address instead, set `Config[:tax_using_ship_address]` to `false`
 
 ## Tax Types
-### Sales Tax
+### Additional Tax (US Sales Tax)
 * Used in the US
 * Default tax type for any tax rate in Spree.
 * Applied to the order as an adjustment
@@ -65,7 +65,7 @@ If a customer purchases 1 coffee mug and 2 of a clothing item priced at $17.99 a
 Tax amount: ($17.99 x 2) x 0.05 is $1.799, which is rounded up to two decimal places, applying a tax
 adjustment of $1.80 to the order. coffee mug is not taxed
 
-### Tax Included
+### Included Tax
 * Used in European Union (EU) and other countries
 * Commonly referred to as a Value Added Tax (VAT.) or "tax inclusive" pricing
 * Applied directly to the item price so prices for items displayed are "inclusive of tax" and no
