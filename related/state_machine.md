@@ -121,7 +121,7 @@ vehicle.state_event             # => nil
 * [Return Authorization](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/return_authorization.rb)
 * [Shipment](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/shipment.rb)
 
-## General Example
+## Detailed Example (Plain Ruby)
 
 ```ruby
 class Vehicle
@@ -332,6 +332,31 @@ vehicle.state_name              # => :parked
 # vehicle.state = :parked
 ```
 
+## Caveats
+* Overridden event methods won't get invoked when using attribute-based event transitions
+* **JRuby / Rubinius**: around_transition callbacks in ORM integrations won't work on JRuby since it doesn't support continuations
+* **Factory Girl**: Dynamic initial states don't work because of the way factory_girl
+  builds objects.  You can work around this in a few ways:
+  1. Use a default state that is common across all objects and rely on events to
+  determine the actual initial state for your object.
+  2. Assuming you're not using state-driven behavior on initialization, you can
+  re-initialize states after the fact:
+
+```ruby
+# Re-initialize in FactoryGirl
+FactoryGirl.define do
+  factory :vehicle do
+    after_build {|user| user.send(:initialize_state_machines, :dynamic => :force)}
+  end
+end
+
+# Alternatively re-initialize in your model
+class Vehicle < ActiveRecord::Base
+  ...
+  before_validation :on => :create {|user| user.send(:initialize_state_machines, :dynamic => :force)}
+end
+```
+
 ## Usage - Rails
 Integrating state_machine into your Ruby on Rails application is straightforward
 and provides a few additional features specific to the framework. To get
@@ -401,32 +426,7 @@ rake appraisal:active_model-3.0.0 test
 rake appraisal:active_record-2.0.0 test
 ```
 
-## Caveats
-* Overridden event methods won't get invoked when using attribute-based event transitions
-* **JRuby / Rubinius**: around_transition callbacks in ORM integrations won't work on JRuby since it doesn't support continuations
-* **Factory Girl**: Dynamic initial states don't work because of the way factory_girl
-  builds objects.  You can work around this in a few ways:
-  1. Use a default state that is common across all objects and rely on events to
-  determine the actual initial state for your object.
-  2. Assuming you're not using state-driven behavior on initialization, you can
-  re-initialize states after the fact:
-
-```ruby
-# Re-initialize in FactoryGirl
-FactoryGirl.define do
-  factory :vehicle do
-    after_build {|user| user.send(:initialize_state_machines, :dynamic => :force)}
-  end
-end
-
-# Alternatively re-initialize in your model
-class Vehicle < ActiveRecord::Base
-  ...
-  before_validation :on => :create {|user| user.send(:initialize_state_machines, :dynamic => :force)}
-end
-```
-
-## Advanced Topics
+## Advanced
 
 ### Symbols vs. Strings
 In all of the examples used throughout the documentation, you'll notice that
@@ -700,15 +700,15 @@ file to load:
 gem 'state_machine', :require => 'state_machine/core'
 ```
 
-## Graphs
+### Graphs
 
-### Generating graphs
+#### Generating graphs
 * You can generate di-graphs based on the events, states, and transitions defined for a state machine using [GraphViz](http://www.graphviz.org)
 * This requires that both the `ruby-graphviz` gem and graphviz library be
 installed on the system
 * For examples of actual images generated, see those under the examples folder
 
-#### Usage
+##### Usage
 To generate a graph for a specific file / class:
 ```bash
 rake state_machine:draw FILE=vehicle.rb CLASS=Vehicle
@@ -737,7 +737,7 @@ rake state_machine:draw FILE=vehicle.rb CLASS=Vehicle HUMAN_NAMES=true
 in the class.  The generated files will use an output filename of the format
 `#{class_name}_#{machine_name}.#{format}`.
 
-### Interactive graphs
+#### Interactive graphs
 Jean Bovet's [Visual Automata Simulator](http://www.cs.usfca.edu/~jbovet/vas.html)
 is a great tool for "simulating, visualizing and transforming finite state
 automata and Turing Machines".  It can help in the creation of states and events
