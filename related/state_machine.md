@@ -1,12 +1,15 @@
 # spree-state_machine (gem)
 
-Creating multiple boolean attributes so behaviors are based 
-on their values to keep state of an object becomes cumbersome and
-difficult to maintain when the complexity of your class starts to increase. Was the previous sentence hard to understand? Exactly.
-
 *state_machine* gem adds support for creating state machines for attributes on any
 Ruby class. It introduces the various parts of a real state machine, including
 states, events, transitions, and callbacks
+
+## Why
+Creating multiple boolean attributes so behaviors are based 
+on them to keep state of an object becomes cumbersome and
+difficult to maintain when the complexity of your class starts to increase. Was the previous sentence hard to understand? Exactly.
+
+
 
 ## Features
 * Initial states
@@ -31,8 +34,14 @@ states, events, transitions, and callbacks
 ## API
 http://rdoc.info/github/pluginaweek/state_machine/master/frames
 
+## Spree Examples
+* [Adjustment](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/adjustment.rb#L101-L104)
+* [Inventory Unit](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/inventory_unit.rb)
+* [Payment](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/payment.rb)
+* [Return Authorization](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/return_authorization.rb)
+
 ## Example
-Class definition:
+Class definition:https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/return_authorization.rb
 
 ```ruby
 class Vehicle
