@@ -34,7 +34,86 @@ difficult to maintain when the complexity of your class starts to increase. Was 
 ## API
 http://rdoc.info/github/pluginaweek/state_machine/master/frames
 
-## Spree Examples
+## ActiveRecord Integration
+* Adds support for database transactions, automatically saving the record, named scopes, validation errors, and observers
+* For more information about the various behaviors added for ActiveRecord state
+machines, see [StateMachine::Integrations::ActiveRecord](http://www.rubydoc.info/github/pluginaweek/state_machine/master/StateMachine/Integrations/ActiveRecord)
+
+##### *Example*
+```ruby
+class Vehicle < ActiveRecord::Base
+  state_machine :initial => :parked do
+    before_transition :parked => any - :parked, :do => :put_on_seatbelt
+    after_transition any => :parked do |vehicle, transition|
+      vehicle.seatbelt = 'off'
+    end
+    around_transition :benchmark
+
+    event :ignite do
+      transition :parked => :idling
+    end
+
+    state :first_gear, :second_gear do
+      validates_presence_of :seatbelt_on
+    end
+  end
+
+  def put_on_seatbelt
+    ...
+  end
+
+  def benchmark
+    ...
+    yield
+    ...
+  end
+end
+
+class VehicleObserver < ActiveRecord::Observer
+  # Callback for :ignite event *before* the transition is performed
+  def before_ignite(vehicle, transition)
+    # log message
+  end
+
+  # Generic transition callback *after* the transition is performed
+  def after_transition(vehicle, transition)
+    Audit.log(vehicle, transition)
+  end
+end
+```
+#### Explicit vs. Implicit Event Transitions
+Every event defined for a state machine generates an instance method on the
+class that allows the event to be explicitly triggered.  Most examples here use this technique.  However, with ActiveRecord, you can also *implicitly* fire events by
+setting the state event attribute first and then invoking the action associated with the state machine
+
+##### *Example*
+```ruby
+class Vehicle < ActiveRecord::Base
+  state_machine :initial => :parked do
+    event :ignite do
+      transition :parked => :idling
+    end
+  end
+end
+```
+###### Explicit Transition
+```ruby
+vehicle = Vehicle.create    # => #<Vehicle id=1 state="parked">
+vehicle.ignite              # => true
+vehicle.state               # => "idling"
+```
+
+###### Implicit Transition
+```ruby
+vehicle = Vehicle.create        # => #<Vehicle id=1 state="parked">
+vehicle.state_event = "ignite"  # => "ignite"
+vehicle.save                    # => true
+vehicle.state                   # => "idling"
+vehicle.state_event             # => nil
+```
+`ignite` event here was automatically triggered when the `save` action was called.  This is particularly useful if you want to allow users to drive the state transitions from a web API.
+
+### Spree Examples
 * [Adjustment](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/adjustment.rb#L101-L104)
 * [Checkout](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/order/checkout.rb)
 * [Inventory Unit](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/inventory_unit.rb)
@@ -42,8 +121,7 @@ http://rdoc.info/github/pluginaweek/state_machine/master/frames
 * [Return Authorization](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/return_authorization.rb)
 * [Shipment](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/shipment.rb)
 
-## Example
-Class definition:https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/return_authorization.rb
+## General Example
 
 ```ruby
 class Vehicle
@@ -253,150 +331,6 @@ vehicle.state_name              # => :parked
 # *Note* that the following is not supported (see StateMachine::MacroMethods#state_machine):
 # vehicle.state = :parked
 ```
-
-## Integration
-### ActiveModel
-* Adds support for validation errors, dirty attribute tracking, and observers
-* Useful for standard ActiveModel and ORMs implementing ActiveModel API
-* For more information about the various behaviors added for ActiveModel state
-machines, see `StateMachine::Integrations::ActiveModel`
-
-##### *Example*
-```ruby
-class Vehicle
-  include ActiveModel::Dirty
-  include ActiveModel::Validations
-  include ActiveModel::Observing
-
-  attr_accessor :state
-  define_attribute_methods [:state]
-
-  state_machine :initial => :parked do
-    before_transition :parked => any - :parked, :do => :put_on_seatbelt
-    after_transition any => :parked do |vehicle, transition|
-      vehicle.seatbelt = 'off'
-    end
-    around_transition :benchmark
-
-    event :ignite do
-      transition :parked => :idling
-    end
-
-    state :first_gear, :second_gear do
-      validates_presence_of :seatbelt_on
-    end
-  end
-
-  def put_on_seatbelt
-    ...
-  end
-
-  def benchmark
-    ...
-    yield
-    ...
-  end
-end
-
-class VehicleObserver < ActiveModel::Observer
-  # Callback for :ignite event *before* the transition is performed
-  def before_ignite(vehicle, transition)
-    # log message
-  end
-
-  # Generic transition callback *after* the transition is performed
-  def after_transition(vehicle, transition)
-    Audit.log(vehicle, transition)
-  end
-
-  # Generic callback after the transition fails to perform
-  def after_failure_to_transition(vehicle, transition)
-    Audit.error(vehicle, transition)
-  end
-end
-```
-
-### ActiveRecord
-* Adds support for database transactions, automatically saving the record, named scopes, validation errors, and observers
-* For more information about the various behaviors added for ActiveRecord state
-machines, see `StateMachine::Integrations::ActiveRecord`
-
-##### *Example*
-```ruby
-class Vehicle < ActiveRecord::Base
-  state_machine :initial => :parked do
-    before_transition :parked => any - :parked, :do => :put_on_seatbelt
-    after_transition any => :parked do |vehicle, transition|
-      vehicle.seatbelt = 'off'
-    end
-    around_transition :benchmark
-
-    event :ignite do
-      transition :parked => :idling
-    end
-
-    state :first_gear, :second_gear do
-      validates_presence_of :seatbelt_on
-    end
-  end
-
-  def put_on_seatbelt
-    ...
-  end
-
-  def benchmark
-    ...
-    yield
-    ...
-  end
-end
-
-class VehicleObserver < ActiveRecord::Observer
-  # Callback for :ignite event *before* the transition is performed
-  def before_ignite(vehicle, transition)
-    # log message
-  end
-
-  # Generic transition callback *after* the transition is performed
-  def after_transition(vehicle, transition)
-    Audit.log(vehicle, transition)
-  end
-end
-```
-#### Explicit vs. Implicit Event Transitions
-Every event defined for a state machine generates an instance method on the
-class that allows the event to be explicitly triggered.  Most examples here use this technique.  However, with ActiveRecord, you can also *implicitly* fire events by
-setting the state event attribute first and then invoking the action associated with the state machine
-
-##### *Example*
-```ruby
-class Vehicle < ActiveRecord::Base
-  state_machine :initial => :parked do
-    event :ignite do
-      transition :parked => :idling
-    end
-  end
-end
-```
-###### Explicit Transition
-```ruby
-vehicle = Vehicle.create    # => #<Vehicle id=1 state="parked">
-vehicle.ignite              # => true
-vehicle.state               # => "idling"
-```
-
-###### Implicit Transition
-```ruby
-vehicle = Vehicle.create        # => #<Vehicle id=1 state="parked">
-vehicle.state_event = "ignite"  # => "ignite"
-vehicle.save                    # => true
-vehicle.state                   # => "idling"
-vehicle.state_event             # => nil
-```
-`ignite` event here was automatically triggered when the `save` action was called.  This is particularly useful if you want to allow users to drive the state transitions from a web API.
-
-### Other Integrations
-See original documentation
 
 ## Usage - Rails
 Integrating state_machine into your Ruby on Rails application is straightforward
