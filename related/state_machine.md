@@ -36,9 +36,11 @@ http://rdoc.info/github/pluginaweek/state_machine/master/frames
 
 ## Spree Examples
 * [Adjustment](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/adjustment.rb#L101-L104)
+* [Checkout](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/order/checkout.rb)
 * [Inventory Unit](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/inventory_unit.rb)
 * [Payment](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/payment.rb)
 * [Return Authorization](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/return_authorization.rb)
+* [Shipment](https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/shipment.rb)
 
 ## Example
 Class definition:https://github.com/spree/spree/blob/4687e608b49236c2850500b026a9fbbab37dc96c/core/app/models/spree/return_authorization.rb
