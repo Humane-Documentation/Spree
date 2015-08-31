@@ -4,12 +4,12 @@
 Ruby class. It introduces the various parts of a real state machine, including
 states, events, transitions, and callbacks
 
+![](state_machine.png)
+
 ## Why
 Creating multiple boolean attributes so behaviors are based 
 on them to keep state of an object becomes cumbersome and
 difficult to maintain when the complexity of your class starts to increase. Was the previous sentence hard to understand? Exactly.
-
-
 
 ## Features
 * Initial states
