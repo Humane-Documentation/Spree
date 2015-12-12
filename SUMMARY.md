@@ -129,6 +129,8 @@
    * [Variant](models/Variant.md)
    * [Zone](models/Zone.md)
    * [ZoneMember](models/ZoneMember.md)
+* Concerns
+   * NumberGenerator
 * [Controllers](controllers)
    * [Addresses API](controllers/address_api.md)
    * [Checkouts API](controllers/checkouts_api.md)
@@ -151,6 +153,4 @@
    * [CheckoutController](controllers/frontend/checkout_controller.md)
 * [Related](related.md)
    * [State Machine](related/state_machine.md)
-* Concerns
-   * NumberGenerator
 
