@@ -90,7 +90,6 @@
    * [PromotionRule](models/PromotionRule.md)
    * [Property](models/Property.md)
    * [Prototype](models/Prototype.md)
-   * [README](models)
    * [Refund](models/Refund.md)
    * [RefundReason](models/RefundReason.md)
    * [Reimbursement](models/Reimbursement.md)
@@ -152,4 +151,5 @@
    * [CheckoutController](controllers/frontend/checkout_controller.md)
 * [Related](related.md)
    * [State Machine](related/state_machine.md)
+* Concerns
 
