@@ -131,6 +131,7 @@
    * [ZoneMember](models/ZoneMember.md)
 * Concerns
    * [NumberGenerator](number_generator.md)
+   * DisplayMoney
 * [Controllers](controllers)
    * [Addresses API](controllers/address_api.md)
    * [Checkouts API](controllers/checkouts_api.md)
