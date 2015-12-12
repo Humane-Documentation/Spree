@@ -152,4 +152,5 @@
 * [Related](related.md)
    * [State Machine](related/state_machine.md)
 * Concerns
+   * NumberGenerator
 
