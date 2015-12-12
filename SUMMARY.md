@@ -130,7 +130,7 @@
    * [Zone](models/Zone.md)
    * [ZoneMember](models/ZoneMember.md)
 * Concerns
-   * NumberGenerator
+   * [NumberGenerator](number_generator.md)
 * [Controllers](controllers)
    * [Addresses API](controllers/address_api.md)
    * [Checkouts API](controllers/checkouts_api.md)
