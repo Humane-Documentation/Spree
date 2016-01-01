@@ -154,5 +154,5 @@
    * [CheckoutController](controllers/frontend/checkout_controller.md)
 * [Related](related.md)
    * [State Machine](related/state_machine.md)
-* Customization
+* [Customization](customization.md)
 
