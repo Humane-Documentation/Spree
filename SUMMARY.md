@@ -154,6 +154,6 @@
 * [Related](related.md)
    * [State Machine](related/state_machine.md)
 * [Customization](customization.md)
+   * [Logic Customization](how_to/logic_customization.md)
    * 1
-* [Logic Customization](how_to/logic_customization.md)
 
