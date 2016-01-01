@@ -12,7 +12,6 @@
    * [Configure Email](how_to/send_email.md)
    * [Test](how_to/testing.md)
    * [Customize](how_to/customization.md)
-       * [Extension Exercise](how_to/extension_exercise.md)
    * [Internationalize](how_to/internationalization.md)
    * [Migrate Data](how_to/migration_to_spree.md)
    * [Get Help](how_to/getting_help.md)
@@ -154,5 +153,6 @@
 * [Customization](customization.md)
    * [Asset Customization](how_to/asset_customization.md)
    * [View Customization](how_to/view_customization.md)
+   * [Extension Exercise](how_to/extension_exercise.md)
    * [Logic Customization](how_to/logic_customization.md)
 
