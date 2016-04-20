@@ -1,11 +1,11 @@
 [Index](../_index.md) » ProductProperty
 
 # (Class) [Spree::ProductProperty](http://m.gymplayer.com/product_property.rb)
-* Distinguishing characteristics for a product that don't change across its variants such as 
+* Distinguishing characteristics for a product that don't change across its variants such as
 description, permalink, availability, shipping category, etc.
 * Provide additional information about a product to help customers make a better purchase decision
 * You can retrieve a property value on a `Product` by calling `property` and passing its name:
-```shell
+```bash
 product.property("material")
 => "100% Cotton"
 ```
@@ -37,5 +37,5 @@ virtual attributes for use with AJAX completion stuff
 ### (Object) **property_name=**(name)
 
         self.property = property
-  
+
 

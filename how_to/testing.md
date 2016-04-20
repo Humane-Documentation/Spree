@@ -11,14 +11,14 @@ improve the test coverage of Spree we took another look at RSpec and it was the 
 terms of strength of community and documentation.
 
 ## Testing Spree Components
-Spree consists of several different gems (see[Source Code Guide](navigating#layout-and-structure)
+Spree consists of several different gems (see [Source Code Guide](navigating#layout-and-structure)
 for more details.) Each of these gems has its own test suite which can be found in the `spec`
 directory. Since these gems are also Rails engines, they can't really be tested in complete
 isolation - they need to be tested within the context of a Rails application.
 
 You can easily build such an application by using the Rake task designed for this purpose, running
 it inside the component you want to test:
-```shell
+```bash
 bundle exec rake test_app
 ```
 This will build the appropriate test application inside of your `spec` directory. It will also add
@@ -31,43 +31,43 @@ There is no need to run `rake db:migrate` or `rake db:test:prepare` after runnin
 
 ### Running Tests
 Once your test application has been built, you can then run the specs in the standard RSpec manner:
-```shell
+```bash
 bundle exec rspec spec
 ```
 We also set up a build script that mimics what our build server performs. You can run it from the
 root of the Spree project like this:
-```shell
+```bash
 bash build.sh
 ```
 If you would like to run specs against a particular database you may specify the
 dummy apps database, which defaults to sqlite3.
-```shell
+```bash
 DB=postgres bundle exec rake test_app
 ```
 To run specs for only a single file
-```shell
+```bash
 bundle exec rspec spec/models/spree/state_spec.rb
 ```
 To run a particular line of spec
-```shell
+```bash
 bundle exec rspec spec/models/spree/state_spec.rb:7
 ```
 You can enable fail fast to stop tests at first failure
-```shell
+```bash
 FAIL_FAST=true bundle exec rspec spec/models/state_spec.rb
 ```
 To run simplecov code coverage report
-```shell
+```bash
 COVERAGE=true bundle exec rspec spec
 ```
 If working on multiple facets of Spree to test that you have [PhantomJS](http://phantomjs.org/)
 installed and that you have a postgres user:
-```shell
+```bash
 createuser -s -r postgres
 ```
 To execute all tests, run this command at root to generate test applications and run specs for
 all facets:
-```shell
+```bash
 bash build.sh
 ```
 
@@ -76,7 +76,7 @@ Spree uses [factory_girl](https://github.com/thoughtbot/factory_girl) to create 
 testing purpose. All of the factories are also packaged in the gem. So if you are writing an
 extension or if you just want to play with Spree models then you can use these factories as
 illustrated below.
-```shell
+```bash
 rails console
 require 'spree/testing_support/factories'
 ```

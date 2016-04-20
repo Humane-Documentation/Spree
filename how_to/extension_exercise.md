@@ -12,7 +12,7 @@ Suppose we want the ability to mark certain products as being on sale. We'd like
 * show products that are on sale on a separate page
 
 Start by generating the extension **outside** of the Spree application:
-```shell
+```bash
 spree extension simple_sales
 cd spree_simple_sales
 bundle install
@@ -20,14 +20,14 @@ bundle install
 This creates a `spree_simple_sales` directory. Open **spree_simple_sales_gemspec** file,
 un-comment (author, email, homepage) lines and edit them as well as (summary, description)
 lines with your information. Then in `spree_simple_sales` directory:
-```shell
+```bash
 bundle install
 ```
 
 ### Adding a Sale Price to Variants
 
 We next create a migration that adds `sale_price` column to variants:
-```shell
+```bash
 bundle exec rails g migration add_sale_price_to_spree_variants sale_price:decimal
 ```
 Because we are dealing with prices, we edit the generated migration to ensure the correct precision
@@ -49,11 +49,11 @@ gem 'spree_simple_sales', :path => '../spree_simple_sales'
 ```
 Adjust the path depending on where you created the extension relative to `mystore` directory.
 After this bundle:
-```shell
+```bash
 bundle install
 ```
 Next run `spree_simple_sales` install generator to copy over the migration we created
-```shell
+```bash
 rails g spree_simple_sales:install
 ```
 
@@ -64,7 +64,7 @@ Now we need to extend `Spree::HomeController` to add an action that selects "on 
 spree_frontend so you need to make it a dependency in your extensions *.gemspec file
 
 Go to `spree_simple_sales` root to create the directory structure for our controller decorator:
-```shell
+```bash
 mkdir -p app/controllers/spree
 ```
 Next, create `home_controller_decorator.rb` in the new directory and add the following to it:
@@ -91,7 +91,7 @@ end
 Let's update the sample data so we have at least one product that is on sale. We will use the
 rails console as we have no admin interface to set sale prices for variants. In `mystore`
 application application directory run:
-```shell
+```bash
 rails console
 ```
 Now, follow the steps I take in selecting a product and updating its master variant to have a sale
@@ -117,7 +117,7 @@ on_demand: false, cost_currency: nil, sale_price: nil>
 
 ### Creating a View
 To create a view to display on sale products we first create the required views directory:
-```shell
+```bash
 mkdir -p app/views/spree/home
 ```
 Next, create `app/views/spree/home/sale.html.erb` and add this to it:
@@ -132,7 +132,7 @@ a `sale_price` on. However their prices aren't correct.
 ### Decorating Variants
 To fix our extension so it uses `sale_price` when present, we first create the required
 directory structure for our new decorator:
-```shell
+```bash
 mkdir -p app/models/spree
 ```
 Next, create `app/models/spree/variant_decorator.rb` and add this to it:
@@ -158,17 +158,17 @@ We should be careful with our Variant decorator since we are modifying core Spre
 #### Generating the Test App
 From our extension root, we run Spree `test_app` rake task to generate a barebones Spree
 application within our `spec` directory to run our tests against:
-```shell
+```bash
 bundle exec rake test_app
 ```
 After this running `rspec` should show that it there are no tests in it (yet):
-```shell
+```bash
 No examples found.
 Finished in 0.00005 seconds
 0 examples, 0 failures
 ```
 Let's replicate the extension's directory structure in our spec directory:
-```shell
+```bash
 mkdir -p spec/models/spree
 ```
 In the new directory, let's create `variant_decorator_spec.rb` and add the following tests to it:
@@ -217,7 +217,7 @@ We want to override the product edit admin page, so the view we want to modify i
 product form partial. This file's path will be `spree/admin/products/_form.html.erb`.
 
 First, let's create the overrides directory with the following command:
-```shell
+```bash
 mkdir app/overrides
 ```
 So we want to override `spree/admin/products/_form.html.erb`. Here is the part of the file we are

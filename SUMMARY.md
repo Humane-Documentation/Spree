@@ -8,6 +8,7 @@
    * [APIs](application/apis.md)
 * [How-To](how_to)
    * [Install](how_to/installation.md)
+   * [Upgrade](upgrade.md)
    * [Configure Security](how_to/security.md)
    * [Configure Email](how_to/send_email.md)
    * [Test](how_to/testing.md)

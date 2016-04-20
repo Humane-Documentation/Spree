@@ -12,7 +12,7 @@
 > For a specific API, see its related guide or [controller documentation](/../Controllers/README.md)
 
 * Spree API uses JSON and currently supports RESTful access to the resources listed
-* This API was built using the [Rabl](https://github.com/nesquena/rabl) gem. Please 
+* This API was built using the [Rabl](https://github.com/nesquena/rabl) gem. Please
 consult its documentation if you wish to understand how the templates use it to return data
 * Spree API conforms to a set of [rules](#rules)
 
@@ -20,13 +20,13 @@ consult its documentation if you wish to understand how the templates use it to 
 You will need an authentication token to access the API. These keys can be generated on the
 user edit screen within the admin interface. To make a request to the API, pass a
 `X-Spree-Token`  header along with the request:
-```shell
+```bash
 curl --header "X-Spree-Token: YOUR_KEY_HERE" http://example.com/api/products.json
 ```
 
 Alternatively, you may also pass through the token as a parameter in the request if a header
 just won't suit your purposes (i.e. JavaScript console debugging).
-```shell
+```bash
 curl http://example.com/api/products.json?token=YOUR_KEY_HERE
 ```
 

@@ -215,7 +215,7 @@ GitHub will automatically detect this commit message when you push it and link t
 
 We add code from Pull Requests to spree using the [hub gem](https://github.com/defunkt/hub), in particular the `hub am` command, which is used like this:
 
-```shell
+```bash
 hub am -3 https://github.com/spree/spree/pull/<number>
 ```
 
@@ -266,7 +266,7 @@ Git branches are "cheap." Creating branches in Git is incredibly easy and it's a
 
 For example, if we were submitting a patch to fix an issue with the CSS in the flash error message you could create a branch as follows:
 
-```shell
+```bash
 git remote add upstream git://github.com/spree/spree.git
 $ git fetch upstream
 $ git checkout -b fix-css-for-error-flash --track upstream/master
@@ -276,20 +276,20 @@ The fetch command will grab all of the latest commits from the Spree master bran
 
 You can then do work locally on this topic branch and push it up to your GitHub fork when you are done. So in our previous example we do something like:
 
-```shell
+```bash
 git push origin fix-css-for-error-flash
 ```
 
 Of course if you want the fix for yourself to use in your own local code you should probably merge it down to your own personal master branch that you're using for development
 
-```shell
+```bash
 git checkout master
 $ git merge fix-css-for-error-flash
 ```
 
 You should probably also clean up after yourself a little. The branch has been pushed to GitHub and you've merged it locally so you don't really need a local copy of the branch laying around.
 
-```shell
+```bash
 git branch -D fix-css-for-error-flash
 ```
 
@@ -315,7 +315,7 @@ These are some guidelines and please use your best judgment in using them.
 ### Including a Test
 
 Ideally your pull request will also include a test that verifies a bug (or the absence of the new
- feature) before your fix and also verifies proper functionality when you are finished. Please 
+ feature) before your fix and also verifies proper functionality when you are finished. Please
  read the [Testing Guide](testing.md) for more information on writing and running your tests.
 
 ***
@@ -336,7 +336,7 @@ Improvements to the documentation are encouraged. The primary source of document
 
 To build the documentation normally simply clone and install.
 
-```shell
+```bash
 git clone git://github.com/spree/spree.git
 $ cd spree/guides
 $ bundle install
@@ -345,7 +345,7 @@ $ bundle exec guides build
 
 Then simply use the nanoc command to compile and preview the guides in your browser at http://localhost:3000
 
-```shell
+```bash
 nanoc compile
 $ nanoc view
 ```
@@ -395,7 +395,7 @@ Any text that needs to be emphasized should be in _italics_.
 ####Terminal Blocks####
 You can specify terminal blocks by setting it off with <code>```bash</code>. In addition, you can differentiate commands you are using from output returned by using the `$` precursor for input and `=>` precursor for output.
 
-```shell
+```bash
 irb
 $ c = "Hello world"
 $ c

@@ -1,104 +1,87 @@
 # Installation
 ## Alternatives
-### Building a Sandbox Application
-Spree includes a helpful Rake task for setting up a sample application:
+### Build a Sample Application
+Spree includes a helpful Rake task for setting up a *sandbox* application:
 * Clone the Git repo
-```shell
+```bash
 git clone git://github.com/spree/spree.git
 cd spree
 ```
 > It's a good idea to use a new "*gem environment*" so Spree gems wouldn't fight with your existing dependencies. This can be done with [RVM Gemsets](https://rvm.io/gemsets/creating)
 * Install the gem dependencies
-```shell
+```bash
 bundle install
 ```
 * Create a sandbox application for testing purposes (and automatically perform all necessary database setup)
-```shell
+```bash
 bundle exec rake sandbox
 ```
 * Start the server
-```shell
+```bash
 cd sandbox && rails server
 ```
 
-This creates a barebones application configured with Spree gem. It runs the DB migrations  and sets
+This creates a bare-bones application configured with Spree gem. It runs the DB migrations  and sets
 up the sample data. Resulting `sandbox` folder is ignored by `.gitignore` and is  deleted and
 rebuilt from scratch each time the Rake task runs.
 
-### Use as a Gem with Existing Application
+### Use in an Existing Application
 * To use a stable branch of Spree, add this line to your Gemfile
-```
+```ruby
 gem 'spree', github: 'spree/spree', branch: '3-0-stable'
 ```
 * To use the bleeding edge version of Spree:
-```
+```ruby
 gem 'spree', github: 'spree/spree'
 ```
 * Install these gems using this command:
-```shell
+```bash
 bundle install --auto-accept
 ```
 * Use the install generator to set up Spree:
-```shell
+```bash
 rails g spree:install --sample=false --seed=false
 ```
 * You can avoid running DB migrations and or generating seed and sample data by passing these flags:
-```shell
+```bash
 rails g spree:install --migrate=false --sample=false --seed=false
 ```
 * To perform those on your own:
-```shell
+```bash
 bundle exec rake railties:install:migrations
 bundle exec rake db:migrate
 bundle exec rake db:seed
 bundle exec rake spree_sample:load
 ```
 
-#### Browse Store
+#### To Browse Store
 [http://localhost:3000](http://localhost:3000)
 
-#### Browse Admin Interface
+#### To Browse Admin Interface
 [http://localhost:3000/admin](http://localhost:3000/admin)
 
-Username `spree@example.com` and password `spree123`
+Username `spree@example.com`   
+Password `spree123`
 
-> If you elected not to use the `--auto-accept` option when you added Spree to your Rails app, and 
-did not install the seed data, the admin user will not yet exist in your database. You can run a 
-simple rake task to create a new admin user.
-
-> ```bash
-> rake spree_auth:admin:create
-> ```
-
-## Performance
-Rails in development mode continuously reloads objects on each request. The asset pipeline made 
-things worse. To speed up performance in development mode when NOT working on front end issues:
-* In your `config/development.rb` add:
+> If you elected not to use the `--auto-accept` option when you added Spree to your Rails app, and
+did not install the seed data, the admin user will not yet exist in your database. To create a new admin user run this rake task:
+```bash
+rake spree_auth:admin:create
 ```
+
+## Performance in Development Mode
+In development mode, Rails continuously reloads objects on each request. Its asset pipeline made
+things even slower. To speed up performance in development mode **when NOT working on front end issues**:
+* In your `config/environments/development.rb`, add:
+```ruby
 config.assets.debug = false
 ```
 * Precompile your assets:
-```
+```ruby
 RAILS_ENV=development bundle exec rake assets:precompile
 ```
-* To remove precompiled assets (especially before committing to Git):
-```
+
+> To remove precompiled assets at anytime (**especially** before committing to Git etc.):
+```ruby
 RAILS_ENV=development bundle exec rake assets:clean
 ```
-
-## Upgrade
-The core files are encapsulated separately from sandbox so upgrading to newer files will not 
-override nor replace sandbox's customized files.
-
-To upgrade:
-* Ensure the installed spree gem is up-to-date by modifying `Gemfile` to match the new 
-spree version
-* Run `bundle update spree`
-* Copy any DB migrations from Spree (and any other engine) and run them:
-```
-    rake railties:install:migrations
-    rake db:migrate
-```
-* If you have extensions, you will need to manually verify that each works once an upgrade is 
-complete. Typically, compatible extensions will in a branch matching the upgrade version
-* Manually test your store

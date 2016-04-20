@@ -43,7 +43,7 @@ All non-master variants are  based on `option_type` and `option_value` combinati
 ```
 * Image sizes can be changed by altering the value of `Config[:attachment_styles]`and regenerating
 the paperclip thumbnails with this Bash command:
-```shell
+```bash
 bundle exec rake paperclip:refresh:thumbnails CLASS=Spree::Image
 ```
 * To change the image displayed when a product has no image, create new versions of the files within [app/assets/images/noimage]
@@ -83,7 +83,7 @@ bundle exec rake paperclip:refresh:thumbnails CLASS=Spree::Image
 
 
 ###  (Boolean) **deleted?**
-use deleted? rather than checking the attribute directly. this allows extensions to override 
+use deleted? rather than checking the attribute directly. this allows extensions to override
 deleted? if they want to provide their own definition.
 
 ### (Object) **descriptive_name**
@@ -93,7 +93,7 @@ deleted? if they want to provide their own definition.
 Default to master name
 
 ###  (Boolean) **in_stock?**
-    
+
 
 ###  (Boolean) **is_backorderable?**
 
@@ -108,7 +108,7 @@ returns number of units currently on backorder for this variant.
 
 
 ### (Object) **options=**(options = {})
-    
+
 
 ### (Object) **options_text**
 
@@ -123,14 +123,14 @@ returns number of units currently on backorder for this variant.
 
 
 ### (Object) **product**
-Product may be created with deleted_at already set, which would make AR's default finder return 
+Product may be created with deleted_at already set, which would make AR's default finder return
 nil. This is a stopgap for that little problem.
 
 ### (Object) **set_option_value**(opt_name, opt_value)
 
 
 ###  (Boolean) **should_track_inventory?**
-Shortcut method to determine if inventory tracking is enabled for this variant. This considers 
+Shortcut method to determine if inventory tracking is enabled for this variant. This considers
 both variant tracking flag and site-wide inventory tracking settings
 
 ### (Object) **sku_and_options_text**

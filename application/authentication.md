@@ -12,18 +12,18 @@ such as:
 
 ### Installation
 * If it wasn't added automatically, add the following to your Gemfile
-```
+```ruby
 gem 'spree_auth_devise', github: 'spree/spree_auth_devise'
 ```
 * Install and run the migrations:
-```shell
+```bash
 bundle && bundle exec rake spree_auth:install:migrations
 bundle exec rake db:migrate
 ```
 * In `config/initializers/spree.rb` change `Spree.user_class = 'Spree::LegacyUser'` to
 `Spree.user_class = 'Spree::User'`
 * To set up the admin user run:
-```shell
+```bash
 bundle exec rake spree_auth:admin:create
 ```
 
@@ -44,11 +44,11 @@ Devise can be further configured extensively. See
 
 To enable Devise's `confirmable` module that sends an email with a link to confirm an account:
 * Add this to an initializer (typically `config/initializers/spree.rb`):
-```
+```ruby
 Spree::Auth::Config[:confirmable] = true
 ```
 * Add a Devise initializer (typically `config/initializers/devise.rb`):
-```
+```ruby
 Devise.setup do |config|
   # Required so users don't lose their carts when they need to confirm
   config.allow_unconfirmed_access_for = 1.days
@@ -66,18 +66,18 @@ end
 [Sorcery](https://github.com/NoamB/sorcery) or created manually
 
 ### Initial Setup
-* In Spree's initializer *config/initializers/spree.rb* change this line:
-```
+* If using model `User`, then in Spree's initializer *config/initializers/spree.rb* change this line:
+```ruby
 Spree.user_class = "Spree::User"
 ```
-To this:
-```
+To:
+```ruby
 Spree.user_class = "User"
 ```
 * Run Spree's custom user generator(tells Spree that you want to use `User` class as the class
 that represents users):
 
-```shell
+```bash
 bundle exec rails g spree:custom_user User
 ```
 This creates:
@@ -87,14 +87,14 @@ This creates:
 
 
 * Run the new migration:
-```shell
+```bash
 bundle exec rake db:migrate
 ```
 
 ### Authentication Routes Setup
 `lib/spree/authentication_helpers.rb` methods need customizing so Spree finds your custom
 authentication routes (Pay attention to code comments):
-```
+```ruby
 module Spree
   module AuthenticationHelpers
      def self.included(receiver)
@@ -129,7 +129,7 @@ ApplicationController.send      :include, Spree::AuthenticationHelpers
 have `main_app` prefixed if the routes are inside the application
 * Define `login_path`, `signup_path` and `logout_path` routes inside your `routes.rb`, e.g. if
 you're using Devise:
-```
+```ruby
 devise_scope :person do
   get '/login', :to => "devise/sessions#new"
   get '/signup', :to => "devise/registrations#new"
@@ -174,7 +174,7 @@ user.has_spree_role?("admin")
 To make the login link appear on Spree pages, you will need to use a Deface override.
 
 * Create *app/overrides/auth_login_bar.rb* with this inside it:
-```
+```ruby
 Deface::Override.new(:virtual_path => "spree/shared/_nav_bar",
   :name => "auth_shared_login_bar",
   :insert_before => "li#search-bar",

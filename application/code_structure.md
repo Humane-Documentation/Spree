@@ -2,7 +2,7 @@
 
 ## Source
 To clone the git repository:
-```shell
+```bash
 git clone git://github.com/spree/spree.git
 ```
 

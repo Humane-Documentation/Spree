@@ -1,12 +1,19 @@
 ## [Spree::User](https://github.com/spree/spree_auth_devise/tree/master/app/models/spree/user.rb)
 
-> IMPORTANT: This model exists in Spree in two ways:
-* Under Spree Core with class name `Spree.user_class.to_s`
-* Under [spree_auth_devise](https://github.com/spree/spree_auth_devise) gem as `Spree::User`
-Most of the time you'll use the one under core, e.g.
-```
+
+> 
+* IMPORTANT: This model exists in Spree in the following ways:
+  * Under Spree Core
+    *  As model [LegacyUser](http://m.gymplayer.com/legacy_user.rb)
+    *  As `Spree.user_class.to_s` in 
+      *  [core/lib/spree/core.rb](https://github.com/spree/spree/blob/master/core/lib/spree/core.rb)
+      *  [core/config/initializers/user_class_extensions.rb](https://github.com/spree/spree/blob/master/core/config/initializers/user_class_extensions.rb)
+  * Under [spree_auth_devise](https://github.com/spree/spree_auth_devise) gem as `Spree::User`
+* Most of the time you'll use the one under core, e.g.
+```ruby
 belongs_to :user, :class_name => Spree.user_class.to_s
 ```
+* More information about it is under [Authentication](../application/authentication.md)
 
 ### Attributes
 * `encrypted_password`
